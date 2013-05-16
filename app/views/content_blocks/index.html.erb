@@ -1,0 +1,25 @@
+<p><a href="/content_blocks/new">Add Content Block</a></p>
+<div style="padding:15px">
+	<div id="large_table">
+	<div id="header_bg">
+	<table colspan="5" class="zebra"  >
+		<tr class="header">
+			<th>Name</th>
+			<th width="85px">Edit</th>
+			<!--<th width="75px" style="text-align:center" >Delete</th>-->
+		</tr>
+		<%for content_block in @content_blocks%>
+		<tr>
+			<td ><%=content_block.name%></td>
+			<td><a href="/content_blocks/<%=content_block.id%>/edit" class="edit_btn">Edit</a></td>
+			<!--<td class="small"><= link_to 'Delete', content_block, :confirm => 'Are you sure?', :method => :delete, :class=>"delete_btn" %></td>-->
+		</tr>
+		<%end%>
+	</table>
+	
+	<%=will_paginate @content_blocks%>
+	</div>
+	<div class="footer"></div>
+	</div>
+	
+	

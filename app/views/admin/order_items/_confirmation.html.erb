@@ -1,0 +1,9 @@
+<strong>
+  <% if order_item.is_confirmed? %>
+    Yes
+  <% else %>
+    No
+    <br><br>
+    <%= link_to "Confirm Now!", confirm_admin_order_items_path(:id=>order_item.id), :remote=>true %>
+  <% end %>
+</strong>

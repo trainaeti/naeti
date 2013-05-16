@@ -1,0 +1,83 @@
+<p><%=link_to image_tag('back_btn.png', :alt=>'Back').html_safe, admin_courses_path %></p>
+<div id="user_admin_module">
+  <div id="large_table">
+	<div id="header_bg">
+		<div id="tabs">
+			<ul>
+				<li><a href="#tabs-1">Class Info</a></li>
+				<li><a href="#tabs-2">Registrants</a></li>
+				<li><a href="#tabs-4">Upload Files</a></li>
+			</ul>
+			<div id="tabs-1">
+	  		  <div class="user_info" style="margin-left:15px;margin-top:15px;">
+                <h1>Details</h1>
+	  		    <p style="margin-left:15px;"><strong>Price: </strong><%=format_price(@course.price)%></p>
+		        <p style="margin-left:15px;"><strong>Description: </strong></p>
+		        <p style="margin-left:15px;"><%=@course.description%></p>
+		        <% if @course.pdf_location.present? %>
+		          <p style="margin-left:15px;">
+		            <%=link_to ("<img src='/images/pdf_icon_small.gif' style='vertical-align:middle'> Download Course Brochure ".html_safe, @course.pdf_location) %>
+		          </p>
+		        <% end %>
+	          </div>
+	  		 
+			</div> <!-- end tabs 1-->
+
+			<div id="tabs-2">
+	  		  <div class="user_info" style="margin-left:15px;margin-top:15px;">
+	  		    <h1>Course List</h1>
+		
+		        <div id="info" style="margin-left:15px;">
+			      <p>Class dates:</p>
+			      <ul class="course-list">
+			 	    <% @course.course_dates.each do |course_date| %>
+			 	      <li>			    
+			 	        <strong>Instructor: </strong>
+			 	        <%= course_date.user_id.present? ? link_to(User.where(:id=>course_date.user_id).first.name, user_path(course_date.user_id)) : "None" %>
+			 	        <br>
+			 	        <%=course_date.start_date.strftime("%a %b %d, %Y")%> - <%=course_date.end_date.strftime("%a %b %d, %Y")%>
+			 	        <br>
+			 	        [<%=course_date.sku %>]
+			 	        <br>
+			 	        <%= link_to "Download List (#{OrderItem.confirmed.where(:course_date_id=>course_date.id).count} people)", admin_registrants_path(:csv, :course_date=>course_date.id), :target=>"_blank" %>
+			 	        <br>
+			 	        <%= link_to "Download Waiting List (#{Waitinglist.where(:course_date_id=>course_date.id).count} people)", waitinglists_path(:csv, :course_date=>course_date.id), :target=>"_blank" %>
+                      </li>
+		    		<%end%>
+		    	  </ul>
+		    	  <br>
+		    	  <h2>Send Class Reminders</h2>
+		    	  <p>
+		    	  <%=form_tag('/admin/courses/send_reminder', :remote=>true) do |f| %>
+		    	    <p><label>Class date (including everything in the last 30 days)</label></p>
+		    	    <%=select("course_date", "id", @course.course_dates.current_and_recent.collect {|p| [ "#{p.start_date.strftime("%a %b %d, %Y").to_s} - #{p.end_date.strftime("%a %b %d, %Y").to_s}" , p.id ] })%>  
+		    	    <p><label>Message</label></p>
+		    	    <%=text_area_tag :message, nil, :style=>"width:550px; height:200px;" %>
+		    	    <p>&nbsp;</p>																					
+                    <p>
+                      <input type="submit" name="some_name" value="" id="submit_btn">
+			        </p>
+		    	  <%end%>
+		    	  </p>
+		    	  <div style="clear:both">&nbsp;</div>
+		        </div>
+	  		    
+	  		  </div>
+			</div> <!-- end tabs 1-->
+
+			<div id="tabs-4">
+	  		  <div class="user_info" style="margin-left:15px;margin-top:15px;">
+	  		    <h1>Upload Files</h1>
+	  		    <%= render :partial=>"media" %>
+	  		    <%= render :partial=>"admin/course_assets/show" %>
+
+	  		  </div>
+			</div> <!-- end tabs 1-->
+
+				
+		</div><!-- end tabs-->
+	
+    </div><!-- end header bg-->
+	<div class="footer"></div>
+  </div><!-- end large table-->
+</div>

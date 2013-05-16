@@ -1,0 +1,57 @@
+	<div class="top_box">
+		<ul id="details">
+			<li><h3>Details</h3></li>
+			<li>
+				<strong>Price: <%=format_price(@course.price)%></strong>
+			</li>
+			
+		</ul>
+		<div id="info">
+			<h3>
+				This course is offered on the following dates:
+			</h3>
+			<ul>
+			    <% @course.course_dates.current.available.each do |course_date| %>
+				<li>
+				  <%=course_date.start_date.strftime("%a %b %d, %Y")%> - <%=course_date.end_date.strftime("%a %b %d, %Y")%>
+                  [<%=course_date.sku %>]
+                  <%=( link_to (image_tag("pdf_icon_small.gif", :style=>"vertical-align:middle"), course_date.pdf_location, :title=>"Download Course Brochure") ) if course_date.pdf_location %>
+				</li>
+				<%end%>
+			</ul>
+				<% if @course.course_dates.current.available.blank? %>
+				  <p>There are no course dates currently available for registration. Please check below for any available dates with a waiting list.</p>
+				<% else %>
+  		          <p>You will be able to pick a class date on the next page.</p>
+  		        <% end %>
+		</div>
+		<div id="addtocart">
+		<% if @course.course_dates.current.available.present? %>
+  		  <a href="/courses/register/<%=@course.id %>" id="add_button">Add to Cart</a>
+        <% end %>		  
+		</div>
+ 	</div>
+	
+	<div style="padding:15px 30px">
+		<h2>Description</h2>
+		<p><%=@course.description%></p>
+		<% if @course.pdf_location.present? %>
+		  <p>
+		    <%=link_to ("<img src='/images/pdf_icon_small.gif' style='vertical-align:middle'> Download Course Brochure ".html_safe, @course.pdf_location) %>
+		  </p>
+		<% end %>
+		<% if @course.course_dates.current.waiting.present? %>
+		<br>
+		<h2>This Course is Accepting Waiting List Applicants on the Following Dates:</h2>
+			<ul>
+			    <% @course.course_dates.waiting.current.each do |course_date| %>
+				<p>
+				  <%=course_date.start_date.strftime("%a %b %d, %Y")%> - <%=course_date.end_date.strftime("%a %b %d, %Y")%>
+                  [<%=course_date.sku %>]
+                  &nbsp;&nbsp;&nbsp;
+                  <%=link_to "Register for Waiting List", new_waitinglist_path(:course_date_id=>course_date.id) %>
+				</p>
+				<%end%>
+			</ul>
+		<% end %>	
+	</div>

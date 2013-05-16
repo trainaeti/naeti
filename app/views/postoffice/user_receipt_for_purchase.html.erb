@@ -1,0 +1,53 @@
+*****************************************************************
+<br>
+NOTE: PLEASE DO NOT REPLY DIRECTLY TO THIS EMAIL
+<br>
+*****************************************************************
+<p>Thank you for your registration with naeti.com.</p>
+<p>Please be aware that if you are paying via purchase order you are not confirmed until payment has been received and processed.</p>
+  <div class="rounded_box">
+    <table id="table" border="1" cellspacing="0" cellpadding="0"> 
+      <tr> 
+        <th>Course/Registrant</th> 
+    	<th>Dates</th> 
+    	<th class="center_text">Status</th> 
+    	<th>Total</th> 
+      </tr> 
+      <% @order.order_items.each do |item| %>
+        <tr> 
+	      <td class="header"> 
+	          <%=item.course.title%><br>
+	      	  <%=item.registrant.first_name.capitalize%>
+		      <%=item.registrant.last_name.capitalize%><br>
+		      <%=item.registrant.email%><br>
+	      </td> 
+	      <td> 
+	        <%=item.course_date.start_date.strftime("%a %b %d, %Y")%> - <%=item.course_date.end_date.strftime("%a %b %d, %Y")%>
+	      </td> 	
+	      <td>
+	        <% if item.is_purchaseorder.present? %>
+  	          Check/PO# <%=item.po_number%>
+  	        <% end %>
+	        <% if item.is_www.present? %>
+              PAID
+  	        <% end %>
+	      </td>
+	      <td><%="$" + sprintf("%4.2f",item.course.price)%></td>
+
+    	</tr> 
+      <%end%>
+  
+      <tr> 
+        <td></td> 
+    	<td></td> 
+    	<td align="right"><h3 class="total">Total</h3></td> 
+    	<td><h3 class="total"><%="$" + sprintf("%4.2f",@total)%></h3></td> 
+      </tr> 
+    </table>
+  </div>
+<div style="clear:both">&nbsp;</div>
+<h2>Billing Information</h2>
+<p><strong>Contact:</strong> <%= "#{@order.first_name} #{@order.last_name}"%></p>
+<p><strong>Address:</strong> <%= "#{@order.address} #{@order.city}, #{State.where(:id=>@order.state_id).first.name} #{@order.zip}".html_safe %></p>
+<p><strong>Email:</strong> <%= "#{@order.email}"%></p>
+<p><strong>Phone:</strong> <%= "#{@order.phone}"%></p>

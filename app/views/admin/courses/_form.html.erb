@@ -1,0 +1,59 @@
+<div id="asset_box">
+<%= form_for([:admin, @course]) do |f| %>
+  <% if @course.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+      <% @course.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+	<p>
+		<label for="">Name of Course</label><br>
+		<%= f.text_field :title, :class=>"text" %><br>
+	</p>
+
+	<p>
+		<label for="">Category</label><br>
+		<%= f.select(:course_category_id, options_for_select(CourseCategory.all.map {|category| [category.name, category.id]}, @course.course_category_id), {:prompt=>"Choose a Category"}) %>
+		<br />
+	</p>
+	
+	<p style="float:left; width:120px">
+		<label for="">Price</label><br>
+		<%= f.text_field :price, :class=>"text", :style=>"width:100px;" %><br>
+	</p>
+	
+	<p style="clear:both"><h3>Event Description</h3></p>
+	<p>
+		<%= f.text_area :description, :id=>"", :cols=>"30", :rows=>"10", :class=>"textarea" %>
+	</p>
+
+	<p style="clear:both"><h3>PDF Brochure (You can upload pdfs under Image/Assets to the left)</h3></p>
+	<p>
+		<%= f.text_field :pdf_location, :class=>"text", :style=>"width:600px;" %><br>
+	</p>
+	
+	<p>
+		<label for="">Order</label><br>
+		<%= f.text_field :order, :class=>"text" %><br>
+	</p>
+	
+		<p>
+			<label for="">Active </label><br>
+			<%= f.check_box :active %><br>
+		</p>
+<p style="float:right;margin-top:20px"><input type="submit" name="some_name" value="" id="submit_btn"></p>
+<div style="clear:both">&nbsp;</div>
+<%end%>
+<div id="course-date-form">
+  <h3>Add New Course Date</h3>
+  <%= @course.id.present? ? (render :partial=>"admin/course_dates/form") : "<p>You must save this course before adding course dates. Hit submit and then edit to add courses.</p>".html_safe %>
+</div>
+<div id="show_course_dates">
+  <%= render :partial=>"/course_dates/show" %>
+</div>
+
+</div><!-- end asset_box-->

@@ -1,0 +1,9 @@
+<table>
+<tr><td align="left">Course Title</td><td align="left"><%=@course.title%></td></tr></table>
+
+<table>
+<tr><th align="left">Transaction ID</th><th align="left">Price Paid</th><th align="left">Name</th><th align="left">Address</th><th align="left">City</th><th align="left">State</th><th align="left">Zip</th><th align="left">Email</th><th align="left">Phone</th></tr>
+<%for item in @course.order_items%>
+<tr><td align="left"><%=item.order.transaction_id%></td><td align="left"><%=format_price(item.price)%></td><td align="left"><%=item.order.user.name%></td><td align="left"><%=item.order.user.address%></td><td align="left"><%=item.order.user.city%></td><td align="left"><%=item.order.user.state%></td><td align="left"><%=item.order.user.zip%></td><td align="left"><%=item.order.user.email%></td><td align="left"><%=item.order.user.phone%></td></tr>
+<%end%>
+</table>

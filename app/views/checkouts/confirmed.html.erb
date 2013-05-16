@@ -1,0 +1,46 @@
+<h1 >Class Registration Receipt</h1>
+<div id="inner">
+<div id="receipt_summary" class="top_box">
+		<table style="border:0px" id="table" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<th>Course</th>
+				<th>Dates</th>
+				<th>Total</th>
+			</tr>
+			
+			<%for item in @order.order_items%>
+			<tr> 
+				<td class="header"> 
+				<h3><%=item.course.title%></h3> 
+			</td> 
+			<td > 
+				<%=item.course_date.start_date.strftime("%a %b %d, %Y")%> - <%=item.course_date.end_date.strftime("%a %b %d, %Y")%>
+			</td> 
+
+			<td><%if item.course_date.class_size==0%>Class Full (will be added to wait list)<%else%><%=format_price(item.course.price)%><%end%></td> 
+			</tr> 
+			<%end%>
+			
+			<tr>
+
+				<td></td>
+
+				<td align="right"><h3 class="total">Total</h3></td>
+				<td><h3 class="total"><%=format_price(@order.total)%></h3></td>
+			</tr>
+		</table>
+</div>
+<%if params[:user]%>
+<div style="padding:15px 30px">
+	<h2>Registration Information</h2>
+	<p><strong>Name:</strong> <%=params[:user][:first_name]%> <%=params[:user][:last_name]%></p>
+	<p><strong>Address:</strong> <%=params[:user][:address]%></p>
+	<p><strong>City:</strong> <%=params[:user][:city]%></p>
+	<p><strong>State:</strong> <%=State.find(params[:user][:state_id]).name%></p>
+	<p><strong>zip:</strong> <%=params[:user][:zip]%></p>
+	<h2>Credit Card Information</h2>
+	<p><strong>Card Type:</strong> <%=CreditCardType.find(params[:user][:credit_card_type_id]).name%></p>
+	<p><strong>Number:</strong> <%="XXXXXXXXXXXX" + params[:user][:user_credit_card_number][12,15]%></p>
+	<p><strong>Exp Date:</strong> <%=params[:user][:expiration_month]%> <%=params[:user][:expiration_year]%> </p>
+</div>
+<%end%>

@@ -1,0 +1,29 @@
+<h1>Listing shopping_cart_items</h1>
+
+<table>
+  <tr>
+    <th>Shopping cart</th>
+    <th>Course</th>
+    <th>Course date</th>
+    <th>Quantity</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @shopping_cart_items.each do |shopping_cart_item| %>
+  <tr>
+    <td><%= shopping_cart_item.shopping_cart_id %></td>
+    <td><%= shopping_cart_item.course_id %></td>
+    <td><%= shopping_cart_item.course_date_id %></td>
+    <td><%= shopping_cart_item.quantity %></td>
+    <td><%= link_to 'Show', shopping_cart_item %></td>
+    <td><%= link_to 'Edit', edit_shopping_cart_item_path(shopping_cart_item) %></td>
+    <td><%= link_to 'Destroy', shopping_cart_item, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Shopping cart item', new_shopping_cart_item_path %>

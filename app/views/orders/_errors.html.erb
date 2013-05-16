@@ -1,0 +1,11 @@
+<% if @order.errors.any? %>  
+  <div id="errorExplanation">  
+    <ul> 
+      <% if @order.is_purchase_order %>
+        <li>You must specify a purchase order number or check number and billing information before registration.</li>  
+      <% else %>
+        <li>There was a problem processing your credit card. Please check the name, address, card details, and try again. Please note that you may need to wait up to 10 minutes before your card can be processed.</li>  
+      <% end %>
+    </ul>  
+  </div>
+<% end %>  

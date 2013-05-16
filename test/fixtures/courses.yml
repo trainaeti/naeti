@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  sku: MyString
+  description: MyText
+  price: 9.99
+  Duration: MyString
+  Locations: MyText
+  instructor_id: 1
+  active: false
+  prerequisites: MyText
+
+two:
+  title: MyString
+  sku: MyString
+  description: MyText
+  price: 9.99
+  Duration: MyString
+  Locations: MyText
+  instructor_id: 1
+  active: false
+  prerequisites: MyText

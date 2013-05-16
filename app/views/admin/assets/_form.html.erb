@@ -1,0 +1,17 @@
+<% form_for [:admin,@asset], :html => { :multipart => true } do |form| %>
+  <% if @asset.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+      <% @asset.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p>
+    <%= form.file_field :asset %>
+  </p>  
+  <div class="actions">
+    <%= form.submit %>
+  </div>  
+<% end %>  

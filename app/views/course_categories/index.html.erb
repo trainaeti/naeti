@@ -1,0 +1,22 @@
+<p><a href="/course_categories/new">Add Course Category</a></p>
+	<div id="large_table">
+	<div id="header_bg">
+	<table colspan="5" class="zebra"  >
+		<tr class="header">
+			<th>Name</th>
+			<th width="85px">Edit Category</th>
+			<th width="75px" style="text-align:center" >Delete</th>
+		</tr>
+		<%for course_category in @course_categories%>
+		<tr>
+			<td ><%=course_category.name%></td>			
+			<td><a href="/course_categories/<%=course_category.id%>/edit" class="edit_btn">Edit</a></td>
+			<td class="small"><%= link_to 'Delete', course_category, :confirm => 'Are you sure?', :method => :delete, :class=>"delete_btn" %></td>
+		</tr>
+		<%end%>		
+	</table>
+	<%=will_paginate @course_categories%>
+	</div>
+	<div class="footer"></div>
+	</div>
+	

@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  email: MyString
+  course_date_id: 1
+  is_contacted: false
+
+two:
+  email: MyString
+  course_date_id: 1
+  is_contacted: false

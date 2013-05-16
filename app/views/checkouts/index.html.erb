@@ -1,0 +1,196 @@
+<%=@cc_error%>
+
+<%if @shopping_cart.shopping_cart_items.length > 0%>
+
+<%form_for (@user, :url=>"/checkout") do |f|%>
+
+<div class="rounded_box"> 
+
+	<input type="hidden" name="remove" value="true" />
+	
+	<table id="table" border="0" cellspacing="0" cellpadding="0"> 
+		<tr> 
+			<th>Course/Registrant</th> 
+			<th>Dates</th> 
+			<th class="center_text">Remove</th> 
+			<th>Total</th> 
+		</tr> 
+		<%for item in @shopping_cart.shopping_cart_items%>
+		<tr> 
+			<td class="header"> 
+			<h3>
+			  <%=item.course.title%><br>
+			  <%=item.registrant.first_name.capitalize%>
+			  <%=item.registrant.last_name.capitalize%><br>
+			  <%=item.registrant.email%>
+			<br>
+			  <%=link_to image_tag("add.png", :title=>"Add Another Student"), "/courses/register/#{item.course.id}"%>
+			</h3> 
+		</td> 
+		<td > 
+			<%=item.course_date.start_date.strftime("%a %b %d, %Y")%> - <%=item.course_date.end_date.strftime("%a %b %d, %Y")%>
+		</td> 
+	
+		<td class="center_text"><input type="checkbox" name="shopping_cart_item[ids]" value="<%=item.id%>" id="some_name"></td> 
+		<td><%if item.course_date.class_size==0%>Class Full (will be added to wait list)<%else%><%=format_price(item.course.price)%><%end%></td> 
+		</tr> 
+		<%end%>
+	
+	
+		<tr> 
+			<td></td> 
+			<td></td> 
+			<td align="right"><h3 class="total">Total</h3></td> 
+			<td><h3 class="total"><%=format_price(@total)%></h3></td> 
+		</tr> 
+	</table> 
+
+
+</div><!-- end roundedbox--> 
+<input type="submit" id="update_cart" /> 
+<%end%>
+<div style="clear:both">&nbsp;</div>
+<div id="registration-form">
+<%form_for (@user, :url=>"/checkout") do |f|%>
+<% if @user.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+<%unless user_signed_in?%>
+<table id="billing_info" border="0" cellspacing="0" cellpadding="0"> 
+	<%unless user_signed_in?%>
+	<tr> 
+		<td colspan="2">	<h2 style="padding-top:20px">User Account</h2></td> 
+	</tr> 
+	<tr>
+	  <td>Enter ysour email address and a password to create a user account or
+	    <%=link_to "SIGN IN", user_session_path %> to your existing account.
+	  </td>
+	</tr>
+	<tr> 
+		<td colspan="2"> 
+			<label for="">Email:</label> 
+			<%= f.text_field :email, :class=>"text" %>
+		</td> 
+	</tr> 
+	<tr> 
+		<td colspan="2"> 
+			<label for="">Password:</label> 
+			<%= f.password_field :password, :class=>"text" %>
+		</td> 
+	</tr> 
+	<tr> 
+		<td colspan="2"> 
+			<label for="">Confirm Password:</label> 
+			<%= f.password_field :password_confirmation, :class=>"text" %>
+		</td> 
+	</tr>
+	<%end%>
+	
+</table>
+	<%end%>
+	
+
+	
+	<table id="billing_info" border="0" cellspacing="0" cellpadding="0"> 
+	
+	<tr> 
+		<td colspan="2"><h2 style="padding-top:20px">Billing Information</h2></td> 
+	</tr> 
+	<tr> 
+		<td> 
+			<label for="name">First Name:</label> 
+			<%=f.text_field :first_name, :class=>"text"%>
+		</td> 
+	</tr> 
+
+	<tr>
+		<td> 
+			<label for="name">Last Name:</label> 
+			<%=f.text_field :last_name, :class=>"text"%>
+		</td>
+	</tr>	
+
+	
+	<tr> 
+		<td> 
+			<label for="first_name">Address:</label> 
+			<%=f.text_field :address, :class=>"text" %>
+		</td> 
+	
+	</tr> 
+	<tr> 
+		<td> 
+			<label for="first_name">City:</label> 
+			<%=f.text_field :city, :class=>"text"%>
+		</td> 
+		<td> 
+			<label for="first_name">State:</label> 
+			<%= f.select(:state_id, options_for_select(State.all.map {|state| [state.name, state.id]}, @user.state_id), {:prompt=>"Choose a State"}) %>
+			
+		</td> 
+		<tr> 
+			<td> 
+				<label for="first_name">Zip:</label> 
+				<%=f.text_field :zip, :class=>"text"%>
+			</td> 
+			
+		</tr> 
+	</tr> 
+	<tr> 
+		<td colspan="2"><h2 style="padding-top:20px">Credit Card Information</h2></td> 
+	</tr> 
+	<tr> 
+		<td colspan="2"> 
+			<label for="">Card Number:</label> 
+			<%=f.text_field :credit_card_number, :class=>"text" %>
+		</td> 
+	</tr> 
+	<tr> 
+		<td> 
+			<label for="">Card Type:</label> 
+			<%= f.select(:credit_card_type_id, options_for_select(CreditCardType.all.map {|credit_card_type| [credit_card_type.name, credit_card_type.id]}, @user.credit_card_type_id), {:prompt=>"Choose a Type"}) %>
+		</td> 	
+		<td> 
+			<label for="">Exp Date:</label> 
+			<%= f.select :expiration_month, (1..12).to_a %>	
+			<%= f.select :expiration_year, (Time.now.year..Time.now.year+10).to_a %>
+
+		</td> 
+	</tr> 
+	<tr> 
+		<td colspan="2"> 
+			<label for="">Security Code:</label> 
+			<%=f.text_field :security_code, :class=>"text", :style=>"width:5s0px"%>
+		</td> 
+	</tr> 
+	<tr> 
+		<td colspan="2"> 
+			<p>Information 
+
+			Your e-mail address must be valid. We use e-mail for communication purposes (order notifications, etc). Therefore, it is essential to provide a valid e-mail address to be able to use our services correctly. <br><br> 
+
+			All your private data is confidential. We will never sell, exchange or market it in any way.
+			For further information on the responsibilities of both parts, you may refer to our 
+			Terms & Conditions</p> 
+		</td> 
+	</tr> 
+	<tr> 
+		<td colspan="2"><input type="submit" class="register_btn" name="some_name" value="" id="some_name"></td> 
+	</tr> 
+</table> 
+<%end%>
+
+
+<%else%>
+<p>There are no items in your shopping cart.</p>
+<%end%>
+</div>
+

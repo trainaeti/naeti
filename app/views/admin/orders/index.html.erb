@@ -1,0 +1,36 @@
+<div id="inner">
+
+<div style="padding:15px">
+	
+
+	<div id="large_table">
+	<div id="header_bg">
+	<table colspan="4" class="zebra"  >
+		<tr class="header">
+			<th>Course</th>
+			<th >Name</th>
+			<th >Address</th>
+			<th width="100">Paid</th>
+		</tr>
+		<%for order in @orders%>
+		<%offline = ""%>
+		
+		<tr>
+			<td ><%for item in order.order_items%><%=item.course.title%><%if item.offline_transaction_notes%><%offline = offline + item.offline_transaction_notes%><%end%><br /><br /><%end%></td>
+			<td class="small"><%=order.user.name%></td>
+			<td class="small">
+				<%=raw order.user.full_address%>
+			</td>
+			<td class="small"><%if offline == ""%>Online<%else%>Offline (Notes: <%=raw offline%>)<%end%>
+		</tr>
+		<%end%>
+		
+	</table>
+	<%=will_paginate @orders%>
+	</div>
+	<div class="footer"></div>
+	</div>
+	
+	
+	
+</div>

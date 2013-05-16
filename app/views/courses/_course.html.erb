@@ -1,0 +1,12 @@
+  <tr>
+    <td class="header">
+      <h3><%= link_to course.title, course_path(course) %></h3>
+    </td>
+    <td class="header">
+      <%=truncate_words(course.description, 20)%>
+      <br>
+    </td>
+    <td>
+      <%= link_to image_tag("show_user_btn.png",:title=>"View"), course_path(course) %>
+    </td>
+  </tr>

@@ -1,0 +1,74 @@
+
+		<div id="small_table">
+		<div class="footer"></div>
+			<h2>Search</h2>
+			
+			<table id="search_class" style="width:100%" border="0" cellspacing="15px" cellpadding="15">
+			<%form_tag "/users/search", :method=>"post" do%>
+				<tr><th>Name:</th> </tr>
+				<tr>
+					<td colspan="2"><input class="text" type="text" name="search_term" value="<%=params[:search_term]%>" id="some_name"></td>
+					
+				</tr>
+				<tr><td>
+		          <label for="">Role</label><br>
+				  <%= select_tag(:role, options_for_select(roles, params[:role]) )%>
+				</td>
+					<td><input type="submit" name="some_name" value="" id="some_name" class="search_btn"></td>
+				</tr>
+				<%end%>
+			</table>
+			
+		</div>
+		<div>
+		  <ul>
+		    <li style="float:left">
+		      <%=link_to "Admin List", users_path(:csv, :role_id=>'admin') %>
+		    </li> 
+		    <li style="float:left">&nbsp;&nbsp;|&nbsp;&nbsp;</li>		    
+		    <li style="float:left">
+		      <%=link_to "Instructor List", users_path(:csv, :role_id=>'instructor') %>
+		    </li>
+		    <li style="float:left">&nbsp;&nbsp;|&nbsp;&nbsp;</li>		    
+		    <li style="float:left">
+		      <%=link_to "User List", users_path(:csv, :role_id=>'general') %>
+		    </li>
+		    <li style="float:right">&nbsp;&nbsp;&nbsp;</li>		    
+		    <li style="float:right">
+		      <%=link_to "Add New User", new_user_path %>
+		    </li>		    
+
+		  </ul>
+		</div>
+		<div id="large_table">
+		<div id="header_bg">
+		<table colspan="5" class="zebra"  >
+			<tr class="header">
+				<th>Name</th>
+				<th>Role</th>
+				<th>Status</th>
+				<th width="60px">View</th>
+				<th width="60px">Edit</th>
+				<th width="60px" style="text-align:center">Delete</th>
+			</tr>
+			<% @users.each do |user|%>
+			<tr>
+				<td><%=link_to user.name, user_path(user) %></td>
+				<td><%= get_role(user) %></td>
+				<td>Active</td>
+				<td><%=link_to "Show", user_path(user), :class=>"show_user_btn" %></td>
+				<td><a href="/users/<%=user.id%>/edit" class="edit_btn">Edit</a></td>
+				<td class="small"><%= link_to 'Delete', user, :confirm => 'Are you sure?', :method => :delete, :class=>"delete_btn" %></td>
+			</tr>
+			<%end%>
+			
+
+		</table>
+		<!--<a href="#" class="next_10">View Next 10</a>-->
+		<%=will_paginate @users%>
+		
+		</div>
+		<div class="footer"></div>
+		</div>
+		
+		

@@ -1,0 +1,27 @@
+<h1>Listing waitinglists</h1>
+
+<table>
+  <tr>
+    <th>Email</th>
+    <th>Course date</th>
+    <th>Is contacted</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @waitinglists.each do |waitinglist| %>
+  <tr>
+    <td><%= waitinglist.email %></td>
+    <td><%= waitinglist.course_date_id %></td>
+    <td><%= waitinglist.is_contacted %></td>
+    <td><%= link_to 'Show', waitinglist %></td>
+    <td><%= link_to 'Edit', edit_waitinglist_path(waitinglist) %></td>
+    <td><%= link_to 'Destroy', waitinglist, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Waitinglist', new_waitinglist_path %>

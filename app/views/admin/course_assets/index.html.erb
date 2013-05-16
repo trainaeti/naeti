@@ -1,0 +1,33 @@
+<h1>Listing course_assets</h1>
+
+<table>
+  <tr>
+    <th>Course</th>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Asset file name</th>
+    <th>Asset content type</th>
+    <th>Asset file size</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @course_assets.each do |course_asset| %>
+  <tr>
+    <td><%= course_asset.course_id %></td>
+    <td><%= course_asset.title %></td>
+    <td><%= course_asset.description %></td>
+    <td><%= course_asset.asset_file_name %></td>
+    <td><%= course_asset.asset_content_type %></td>
+    <td><%= course_asset.asset_file_size %></td>
+    <td><%= link_to 'Show', course_asset %></td>
+    <td><%= link_to 'Edit', edit_course_asset_path(course_asset) %></td>
+    <td><%= link_to 'Destroy', course_asset, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Course asset', new_course_asset_path %>

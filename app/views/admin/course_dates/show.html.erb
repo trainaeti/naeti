@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Course:</b>
+  <%= @course_date.course_id %>
+</p>
+
+<p>
+  <b>From date:</b>
+  <%= @course_date.from_date %>
+</p>
+
+<p>
+  <b>To date:</b>
+  <%= @course_date.to_date %>
+</p>
+
+
+<%= link_to 'Edit', edit_course_date_path(@course_date) %> |
+<%= link_to 'Back', course_dates_path %>

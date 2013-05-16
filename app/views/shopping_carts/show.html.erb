@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Course:</b>
+  <%= @shopping_cart.course_id %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @shopping_cart.user_id %>
+</p>
+
+<p>
+  <b>Course date:</b>
+  <%= @shopping_cart.course_date_id %>
+</p>
+
+<p>
+  <b>Quantity:</b>
+  <%= @shopping_cart.quantity %>
+</p>
+
+
+<%= link_to 'Edit', edit_shopping_cart_path(@shopping_cart) %> |
+<%= link_to 'Back', shopping_carts_path %>

@@ -1,0 +1,41 @@
+<%= form_for @course_date, :remote => true do |f| %>
+  <% if @course_date.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+      <% @course_date.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.hidden_field :course_id, :value=>@course.id %>
+  </p>
+  <p>
+    <%= f.label :start_date %><br />
+    <%= f.date_select :start_date, :class=>"text", :start_year => Date.today.year, :order => [:month, :day, :year] %>
+  </p>
+  <p>
+    <%= f.label :end_date %><br />
+    <%= f.date_select :end_date, :start_year => Date.today.year, :order => [:month, :day, :year] %>
+  </p>
+  <p>
+    <%= f.label :class_size %><br />
+    <%= f.text_field :class_size %>
+  </p>
+
+  <p>
+    <label for="">Lead Instructor</label><br>
+	  <%= f.select(:user_id, options_for_select(User.instructors.map {|instructor| [instructor.name, instructor.id]}, @course.instructor_id), {:prompt=>"Choose an Instructor"}) %>
+	<br />
+  </p>
+  <p style="clear:both"><h3>PDF Brochure (You can upload pdfs under Image/Assets to the left)</h3></p>
+  <p>
+	  <%= f.text_field :pdf_location, :class=>"text", :style=>"width:600px;" %><br>
+   </p>
+	
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

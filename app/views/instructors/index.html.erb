@@ -1,0 +1,60 @@
+<div id="large_table">
+<div id="header_bg">
+<table colspan="4" class="zebra"  >
+	<tr class="header">
+		<th>Course Name</th>
+		<th >Dates</th>
+		<th width="85px">Edit Users & Assets</th>
+	</tr>
+	<%for course in current_user.courses_taught.paginate(:per_page=>10, :page=>params[:page])%>
+	<tr>
+		<td ><a href="/instructors/course/<%=course.id%>"><%=course.title%></a></td>
+		<td class="small"><%=show_course_dates(course)%></td>
+		<td><a href="/instructors/course/<%=course.id%>" class="view_icon">View</a></td>
+	</tr>
+	<%end%>
+
+</table>
+<%=will_paginate current_user.courses_taught.paginate(:per_page=>10, :page=>params[:page])%>
+
+</div>
+<div class="footer"></div>
+</div>
+<h2 style="margin-top:20px">User Preferences</h2>
+
+<% if current_user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(current_user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% current_user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+<div id="small_table">
+<div class="footer"></div>
+	<h2>Test</h2>
+	
+	<%= form_for (current_user, :url=>"/instructors", :method=>"post") do |f| %>
+
+	<table id="search_class" border="0" cellspacing="15px" cellpadding="15">
+		<tr><th colspan="2">Change Password:</th> </tr>
+		<tr>
+			<td style="padding-top:10px">New Password<%= f.password_field :password, :style=>"width:250px;", :class=>"text rounded", :id=>"some_name" %></td>
+			<td style="padding-top:10px">Repeat New Password<%= f.password_field :password_confirmation, :style=>"width:250px;", :class=>"text rounded", :id=>"some_name" %></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><input type="submit" name="some_name" value="" id="submit_btn"></td>
+		</tr>
+	</table>
+	<% end %>
+
+</div>
+
+

@@ -1,0 +1,28 @@
+<%= form_for(@course_category) do |f| %>
+  <% if @course_category.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+      <% @course_category.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+
+<div id="asset_box">
+	<p>
+		<label for="">Name</label><br>
+		<%= f.text_field :name, :class=>"text" %><br>
+	</p>
+	<p>
+		<label for="">Order</label><br>
+		<%= f.text_field :order, :class=>"text" %><br>
+	</p>
+
+</div><!-- end asset_box-->
+<p style="float:right;margin-top:20px"><input type="submit" name="some_name" value="" id="submit_btn"></p>
+
+<%end%>

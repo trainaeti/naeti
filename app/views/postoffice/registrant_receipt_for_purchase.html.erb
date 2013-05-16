@@ -1,0 +1,39 @@
+*****************************************************************
+<br>
+NOTE: PLEASE DO NOT REPLY DIRECTLY TO THIS EMAIL
+<br>
+*****************************************************************
+<p>Thank you for your registration with naeti.com. You have registered for the following class.</p>
+<p>Please be aware that if you are paying via purchase order you are not confirmed until payment has been received and processed.</p>
+  <div class="rounded_box">
+    <table id="table" border="1" cellspacing="0" cellpadding="0"> 
+      <tr> 
+        <th>Course/Registrant</th> 
+    	<th>Dates</th> 
+    	<th class="center_text">Status</th> 
+    	<th>Total</th> 
+      </tr> 
+        <tr> 
+	      <td class="header"> 
+	          <%=@item.course.title%><br>
+	      	  <%=@item.registrant.first_name.capitalize%>
+		      <%=@item.registrant.last_name.capitalize%><br>
+		      <%=@item.registrant.email%><br>
+	      </td> 
+	      <td> 
+	        <%=@item.course_date.start_date.strftime("%a %b %d, %Y")%> - <%=@item.course_date.end_date.strftime("%a %b %d, %Y")%>
+	      </td> 	
+	      <td>
+	        <% if @item.is_purchaseorder.present? %>
+  	          Check/PO# <%=@item.po_number%>
+  	        <% end %>
+	        <% if @item.is_www.present? %>
+              PAID
+  	        <% end %>
+	      </td>
+	      <td><%="$" + sprintf("%4.2f",@item.course.price)%></td>
+
+    	</tr> 
+    </table>
+  </div>
+<div style="clear:both">&nbsp;</div>

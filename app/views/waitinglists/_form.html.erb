@@ -1,0 +1,22 @@
+<%= form_for(@waitinglist) do |f| %>
+  <% if @waitinglist.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@waitinglist.errors.count, "error") %> prohibited this waitinglist from being saved:</h2>
+
+      <ul>
+      <% @waitinglist.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.hidden_field :course_date_id, :value=>@waitinglist.course_date_id %>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </div>
+  <p>&nbsp;</p>																					
+  <div class="actions">
+    <%= f.submit 'Join Waitinglist', :class=>"submit_button" %>
+  </div>
+<% end %>

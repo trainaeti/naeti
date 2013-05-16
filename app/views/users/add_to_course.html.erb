@@ -1,0 +1,59 @@
+
+		<div id="large_table" >
+		<div id="header_bg" >
+			<div id="tabs">
+				<ul>
+						<li><a href="#tabs-1">Select Course Date</a></li>
+				</ul>
+	<div id="tabs-1">
+	<table style="margin-left:15px"   >
+		<tr class="header">
+			<th>General Information</th>
+			<th >Usage Information </th>
+		</tr>
+		<tr>
+			<td>
+				<ul class="user_info">
+					<li><strong>Name:</strong> <%=@user.name%></li>
+					<li><strong>Address:</strong> <%=@user.address%></li>
+					<li><strong>City:</strong> <%=@user.city%></li>
+					<li><strong>State:</strong> <%=@user.state%></li>
+					<li><strong>Phone:</strong> <%=@user.phone%></li>
+					<li><strong>Email:</strong> <a href="mailto:<%=@user.email%>"><%=@user.email%></a></li>
+
+				</ul>
+			</td>
+			<td>
+				<table id="course_list" border="0" cellspacing="0" cellpadding="0">
+					
+					<tr><th><h3>Select Course Date to Add</h3></th></tr>
+					<tr>
+						<td>
+							<%form_tag "/users/#{@user.id}/add_to_course" do%>
+								<%= select_tag(:course_date_id, options_for_select(@course.course_dates.all.map {|course_date| [course_date.course_date, course_date.id]}), {:prompt=>"Choose a Date"}) %><br /><br />
+						Offline Transaction Info:  
+						<br /><br />
+						<textarea name="offline_transaction_notes" cols="50" rows="5"></textarea>
+						<br /><br />
+							
+								<input type="submit" value="Add User to Course Date"  id="submit_btn" />
+							<%end%>
+						</td>
+					</tr>
+				</table>
+			</td>
+			
+		</tr>
+		
+
+	</table>
+	</div> <!-- end tabs 1-->
+	
+
+	
+	</div><!-- end tabs-->
+	
+	</div><!-- end header bg-->
+	<div class="footer"></div>
+	</div><!-- end large table-->
+	

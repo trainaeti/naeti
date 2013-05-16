@@ -1,0 +1,114 @@
+
+		<div id="small_table">
+		<div class="footer"></div>
+			<h2>Search</h2>
+			
+			<table id="search_class" style="width:100%" border="0" cellspacing="15px" cellpadding="15">
+			<%form_tag "/admin/order_items/search", :method=>"post" do%>
+				<tr><th>Keywords (registrant first name,registrant last name,registrant email, po number):<br><br></th> </tr>
+				<tr>
+					<td colspan="2"><input class="text" type="text" name="search_term" value="<%=params[:search_term]%>" id="some_name">
+					&nbsp;&nbsp;-or-&nbsp;&nbsp;<%= link_to "reset", admin_order_items_path %></td>
+					
+				</tr>
+				<tr>
+				<tr><th>Order Date Range:<br><br></th> </tr>
+
+				<td>
+				
+				<div class="datefinder">
+
+                  <label for="from">From</label>
+                  <input type="text" id="from" name="from" value="<%=params[:from]%>"/>
+                  <label for="to">To</label>
+                  <input type="text" id="to" name="to" value="<%=params[:to]%>"/>
+                </div>
+
+				</td>
+				</tr>
+
+				<tr>
+					<td style="padding: 0 80px"><input type="submit" name="some_name" value="" id="some_name" class="search_btn"></td>
+				</tr>
+				<%end%>
+			</table>
+			
+		</div>
+		<div id="large_table">
+		<div id="header_bg">
+		<table colspan="5" class="zebra">
+			<tr class="header">
+				<th>Registrant</th>
+				<th>Course</th>
+				<th>Order Info</th>
+				<th>Confirmation</th>
+
+			</tr>
+			<% @order_items.each do |order_item|%>
+			<tr style="vertical-align:top">
+ 			    <td style="padding:20px 3px">
+ 			      <strong>
+ 			      <%= order_item.registrant.first_name %>
+ 			      <%= order_item.registrant.last_name %><br>
+ 			      <%= order_item.registrant.company_name if order_item.registrant.company_name.present? %><br>
+ 			      </strong>
+ 			      <%= order_item.registrant.address %><br>
+ 			      <%= order_item.registrant.city %>,
+ 			      <%= State.where(:id=>order_item.registrant.state_id).first.abbreviation %>
+ 			      <%= order_item.registrant.zip %><br>
+ 			      <%= order_item.registrant.email %><br>
+ 			      <%= order_item.registrant.phone%> (p)<br>
+ 			      <%= order_item.registrant.cell %> (c)<br>
+ 			    </td>
+
+ 			    <td style="padding:20px 3px">
+ 			      <strong><%= order_item.course.title %></strong><br><br>
+ 			      <%= order_item.course_date.start_date.strftime("%m/%d/%Y") %>-
+ 			      <%= order_item.course_date.end_date.strftime("%m/%d/%Y") %><br>
+ 			      <%= order_item.course_date.sku %><br>
+ 			    </td>
+
+ 			    <td style="padding:20px 3px">
+ 			      <% if order_item.is_www %>
+ 			        <strong>
+ 			          Credit Card: <%= OrderTransaction.where(:order_id=>order_item.order_id).first.message if OrderTransaction.where(:order_id=>order_item.order_id).present? %><br>
+ 			          <%= order_item.created_at.strftime("%m/%d/%Y %H:%M:%S") %>
+ 			        </strong>
+ 			      <% end %>
+ 			      <% if order_item.is_purchaseorder %>
+ 			        <strong>
+ 			          PO# <%= order_item.po_number %><br>
+     			      <%= order_item.created_at.strftime("%m/%d/%Y %H:%M:%S") %>
+ 			        </strong>
+ 			      <% end %>
+ 			      <br><br>
+ 			      <strong>Purchaser:</strong><br>
+ 			      <%= order_item.order.first_name %>
+ 			      <%= order_item.order.last_name %><br>
+ 			      <%= order_item.order.address %><br>
+ 			      <%= order_item.order.city %>,
+ 			      <%= State.where(:id=>order_item.order.state_id).first.abbreviation %>
+ 			      <%= order_item.order.zip %><br>
+ 			      <%= order_item.order.email %><br>
+ 			      <%= order_item.order.phone%> (p)<br>
+
+ 			    </td>
+ 			    
+ 			    <td style="padding:20px 3px" class="confirmation_<%=order_item.id%>">
+ 			      <%=render :partial=>"confirmation", :locals=>{:order_item=>order_item} %>
+ 			    </td>
+
+
+			</tr>
+			<%end%>
+			
+
+		</table>
+		<!--<a href="#" class="next_10">View Next 10</a>-->
+		<br>
+		<%=paginate @order_items, :search_term=>params[:search_term], :from=>params[:from], :to=>params[:to]unless request.path.include? 'search'%>
+		
+		</div>
+		<div class="footer"></div>
+		</div>
+		

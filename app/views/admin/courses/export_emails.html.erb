@@ -1,0 +1,5 @@
+<table>
+<%for item in @course.order_items%>
+<tr><td align="left"><%=item.order.user.email%></td></tr>
+<%end%>
+</table>

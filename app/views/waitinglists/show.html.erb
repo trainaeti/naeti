@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Email:</b>
+  <%= @waitinglist.email %>
+</p>
+
+<p>
+  <b>Course date:</b>
+  <%= @waitinglist.course_date_id %>
+</p>
+
+<p>
+  <b>Is contacted:</b>
+  <%= @waitinglist.is_contacted %>
+</p>
+
+
+<%= link_to 'Edit', edit_waitinglist_path(@waitinglist) %> |
+<%= link_to 'Back', waitinglists_path %>

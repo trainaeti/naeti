@@ -1,0 +1,27 @@
+	<ul id="list">
+		<%for category in CourseCategory.all%>
+		  <li><%= link_to "Register for #{category.name} Training", courses_path(:course_category_id=>category.id) %></li>
+		<%end%>
+	</ul>	
+	<div style="padding:15px">
+		<h2><%= @course_category.present? ? @course_category.name : "All"%> Courses</h2>
+		<%=link_to "<p>View All Courses</p>".html_safe, courses_path if @course_category.present? %>
+		<div id="courses" class="rounded_box">
+          
+		  <table id="table" border="0" cellspacing="0" cellpadding="0">
+		  	<tr>
+	  		  <th >Course</th>
+			  <th style="width:400px">Details</th>
+			  <th>View</th>
+			</tr>
+			<%= render @courses %> 	
+		</table>
+		</div>
+		<br>
+		<div>
+		  <%= @course_category.present? ? (paginate @courses, :params => {:course_category_id => @course_category.id}) : (paginate @courses) %>
+		</div>
+		 
+
+	</div>
+	

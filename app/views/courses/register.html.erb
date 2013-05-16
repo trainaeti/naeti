@@ -1,0 +1,90 @@
+	<div class="top_box">
+		<ul id="details">
+			<li><h3>Details</h3></li>
+			<li>
+				<strong>Price: <%=format_price(@course.price)%></strong>
+			</li>
+		</ul>
+		<div id="info">
+			<h3>
+				Select the class you would like to attend:
+			</h3>
+			<% if @registrant.present? %> 
+			  <% if @registrant.errors.any? %>
+                <div id="error_explanation">
+                  <ul>
+                    <li>All fields are required and must be valid.</li>
+                    <% @registrant.errors.full_messages.each do |msg| %>
+                      
+                      <!--<li>< %= msg %></li>-->
+                    <% end %>
+                  </ul>
+                </div>
+              <% end %>
+            <% end %>
+			<% form_tag ("/courses/register/#{@course.id}",{:id=>"register_form"}) do %>
+			<p>
+			  <%=label_tag :registrant_first_name, "Course Date *" %>
+			
+			  <%=select("course_date", "id", @course.course_dates.current.available.collect {|p| [ "#{p.start_date.strftime("%a %b %d, %Y").to_s} - #{p.end_date.strftime("%a %b %d, %Y").to_s}" , p.id ] })%>
+			</p>
+			<p>
+			  <%=label_tag :registrant_company_name, "Company*" %>
+			  <%=text_field_tag :registrant_company_name, (@registrant.company_name ? @registrant.company_name : (current_user.present? ? current_user.company_name : nil )), :name=>"registrant[company_name]" %>
+			</p>			
+			<p>
+			  <%=label_tag :registrant_first_name, "First Name *" %>
+
+			  <%=text_field_tag :registrant_first_name, (@registrant.first_name ? @registrant.first_name : (current_user.present? ? current_user.first_name : nil )), :name=>"registrant[first_name]" %>
+			  
+			  
+			</p>
+			<p>
+			  <%=label_tag :registrant_last_name, "Last Name *" %>
+			  <%=text_field_tag :registrant_last_name, (@registrant.last_name ? @registrant.last_name : (current_user.present? ? current_user.last_name : nil )), :name=>"registrant[last_name]" %>
+			</p>
+			<p>
+			  <%=label_tag :registrant_address, "Address *" %>
+			  <%=text_field_tag :registrant_address, (@registrant.address ? @registrant.address : (current_user.present? ? current_user.address : nil )), :name=>"registrant[address]" %>
+			</p>
+			<p>
+			  <%=label_tag :registrant_city, "City *" %>
+			  <%=text_field_tag :registrant_city, (@registrant.city ? @registrant.city : (current_user.present? ? current_user.city : nil )), :name=>"registrant[city]" %>
+			</p>
+			<p>
+			  <%=label_tag :registrant_state_id, "State *" %>
+			  <%=select "registrant", :state_id, options_for_select(State.all.map {|state| [state.name, state.id]}, ( @registrant.state_id? ? @registrant.state_id : (current_user.present? ? current_user.state_id : nil))), {:prompt => 'Choose a State'} %>
+
+			</p>
+			<p>
+			  <%=label_tag :registrant_zip, "Zip *" %>
+			  <%=text_field_tag :registrant_zip, (@registrant.zip ? @registrant.zip : (current_user.present? ? current_user.zip : nil )), :name=>"registrant[zip]" %>
+			</p>
+			<p>
+			  <%=label_tag :registrant_email, "Email *" %>
+			  <%=text_field_tag :registrant_email, (@registrant.email ? @registrant.email : (current_user.present? ? current_user.email : nil )), :name=>"registrant[email]" %>
+			</p>
+			<p>
+			  <%=label_tag :registrant_phone, "Phone *" %>
+			  <%=text_field_tag :registrant_phone, (@registrant.phone ? @registrant.phone : (current_user.present? ? current_user.phone : nil )), :name=>"registrant[phone]" %>
+			</p>
+			<p>
+			  <%=label_tag :registrant_cell, "Cell *" %>
+			  <%=text_field_tag :registrant_cell, (@registrant.cell ? @registrant.cell : (current_user.present? ? current_user.cell : nil )), :name=>"registrant[cell]" %>
+			</p>
+			<p>
+			  <%=label_tag :is_terms, "" %>
+			  I accept the cancellation policy outlined below: 
+			  <%=check_box_tag :is_terms, true, @registrant.is_terms, :name=>"registrant[is_terms]" %>
+			</p>
+			<p>&nbsp;</p>																					
+            <p>
+              <input type="submit" class="submit_button" name="some_name" value="" id="some_name">
+			</p>
+			<%end%>
+		</div>
+	</div>
+	
+	<div style="padding:15px 30px">
+		<%= ContentBlock.where(:friendly_url=>"cancellation-policy").first.body.html_safe %>
+	</div>

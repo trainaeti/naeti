@@ -1,0 +1,31 @@
+	<p style="clear:both"><h3>Course Dates</h3></p>
+	<p>
+	  <table style="width:100%;">
+	    <tr style="background-color:#ECFBA1;">
+	      <th style="padding:3px">Date(s)</th>
+	      <th style="padding:3px">SKU</th>
+	      <th style="padding:3px">Max Class Size</th>
+	      <th style="padding:3px">Admin</th>
+
+	    </tr>
+	    <% unless @course_dates.blank? %>
+  		  <% @course_dates.each do |course_date| %>
+		    <tr>
+		      <td style="padding:3px"><%= course_date.start_date.strftime("%m/%d/%Y") %> - <%= course_date.end_date.strftime("%m/%d/%Y") %></td>
+		      <td style="padding:3px"><%= course_date.sku.present? ? course_date.sku : "None" %></td>
+		      <td style="padding:3px"><%= course_date.class_size %></td>
+		      <td style="padding:3px">
+		        <% if course_date.order_items.present? %>
+		          <%= link_to "View Registrants", admin_course_path(course_date.course_id) %>
+		        <% else %>
+		          <%= link_to "Delete", course_date_path(course_date), :method => :delete, :remote=>true, :confirm => "Are you sure you want to delete this?" %>
+		        <% end %>
+
+		      </td>
+		    </tr>
+		  <% end %>
+	    <% end %>
+
+      </table>
+      <%= "<h3>There are no current course dates for this class</h3>".html_safe if @course_dates.blank? %>
+	</p>

@@ -1,0 +1,7 @@
+<p><%=link_to image_tag('back_btn.png', :alt=>'Back').html_safe, users_path %></p>
+
+<div id="user_admin_module">
+  <%= render :partial=>"instructor" if @user.instructor %>
+  <%= render :partial=>"admin" if @user.admin %>
+  <%= render :partial=>"general" if !@user.admin && !@user.instructor%>
+</div>

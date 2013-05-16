@@ -1,0 +1,15 @@
+<div id="current_cart">
+  <%=render :partial=>"cart" %>
+</div>
+<%if @shopping_cart.shopping_cart_items.present? %>
+  <div style="clear:both">&nbsp;</div>
+  <% if current_user %>
+    <%form_for @order, :remote=>true do |f| %>
+      <div id="payment_box">
+        <%=render :partial=>"purchase", :locals=>{:f=>f} %>
+      </div>
+    <% end %>
+  <% else %>
+  <p>Please <%= link_to "Sign in", new_session_path(@user) %> -or- <%= link_to "Sign up", new_registration_path(@user) %> continue</p>
+  <% end %>
+<% end %>

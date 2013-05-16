@@ -1,0 +1,987 @@
+@import url('reset.css');
+
+body{
+	background:url('../images/bg.jpg') #ebf2bf repeat-x;
+}
+/*-------------------------GLOBAL------------------------*/
+#wrap{
+	width:1020px;
+	background:url('../images/center_bg.jpg') no-repeat;
+	margin:0 auto;
+	position:relative;
+	padding-bottom:40px;
+}
+#wrap #content_bg{
+	background:url('../images/content_top.png') no-repeat ;
+	background-position:0 -3px;
+	padding:55px 0 0 0;
+}
+#wrap  #top_bar{
+	height:5px;
+	background:#005173;
+	width:960px;
+	position:absolute;
+	top:50px;
+	left:30px;
+}
+#wrap  #content_outer{
+	width:960px;
+	margin:0 auto;
+	overflow:hidden;
+	padding-bottom:10px;
+	background:url('../images/content_outer_top.png') repeat-x #ecfba1 ;
+	
+}
+.ui-tabs .ui-tabs-hide {
+     display: none;
+}
+.download{
+	padding:0 0 0 15px;
+	background:url('../images/download_icon.png') no-repeat;
+	float:right;
+}
+
+a, a:visited, a:hover {
+  text-decoration:none;
+  color: #2D2D2D;
+}
+a:hover {
+  color: #999;
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}
+a img:hover, .submit_button:hover, input[type="submit"]:hover {
+  opacity: 0.8;
+  filter: alpha(opacity=80); }
+  
+#error_explanation, #errorExplanation {
+  background-color: #eaaeae;
+  border: 1px solid #36393d;
+  margin-bottom: 10px; }
+#error_explanation ul, #errorExplanation ul {
+  list-style-type: none;
+  padding: 1.2em;
+  font-size: 14px;
+  line-height: 1.8em; }
+#error_explanation h2, #errorExplanation h2 {
+  display: none; 
+}
+      
+/*------------------------tabs----------------------------*/
+#tabs ul {
+	padding:10px 0 0 10px;
+	overflow:hidden;
+}
+#tabs ul li{
+	float:left;
+	font:18px helvetica, sans-serif;
+	margin:0 -15px 0 0;
+}
+#tabs .ui-tabs-nav li a{
+	padding:23px 0 0 0;
+	display:block;
+	width:164px;
+	height:22px;
+	color:#6c6c6c;
+	text-align:center;
+	text-decoration:none;
+	position:relative;
+	z-index:9;
+	background:url('../images/tabs_inactive_bg.png');
+}
+#tabs ul .ui-state-active{
+	margin:1px -15px 0 0;
+}
+#tabs ul .ui-state-active a{
+	padding:25px 0 0 0;
+	display:block;
+	width:164px;
+	height:24px;
+	color:#1f3f5c;
+	text-align:center;
+	z-index:99;
+	text-decoration:none;
+	background:url('../images/tabs_active_bg.png');
+}
+
+/*------------------------INNER GLOBAL STYLES-------------*/
+ .course_registration{
+	width:194px;
+	height:35px;
+	background:url('../images/course_registration.png');
+	display:block;
+	text-indent:-9999px;
+}
+ .contact_btn{
+	width:194px;
+	height:35px;
+	background:url('../images/contact_naeti.png');
+	display:block;
+	text-indent:-9999px;
+}
+.view_courses_btn{
+	width:192px;
+	height:35px;
+	background:url('../images/views_courses_btn.png');
+	display:block;
+	text-indent:-9999px;
+}
+.rounded{
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+	border-radius: 3px 3px 3px 3px;
+	padding:3px;
+	behavior: url(PIE.php);
+}
+.rounded_box{
+	
+	overflow:hidden;
+	background:#005173;
+	padding:1px;
+	position:relative;
+	z-index:1;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	border-radius: 5px 5px 5px 5px;
+	behavior: url(PIE.php);
+}
+#left_nav{
+	float:left;
+	width:225px;
+	padding:10px 0 10px 10px;
+	margin-top:110px;
+}
+#left_nav #section_nav li{
+	padding-bottom:5px;
+	margin-bottom:5px;
+	border-bottom:1px solid #dbea90;
+}
+#left_nav #section_nav li a{
+	font:16px helvetica, sans-serif;
+	text-decoration:none;
+	color:#303030;
+}
+#inner_content{
+	float:left;
+	width:696px;
+	background:url('../images/inner_bg.png') no-repeat;
+	padding:30px 0px 20px 8px;
+}
+#inner_content #inner{
+	width:100%;
+	background:#faffdd;
+}
+#inner_content h1{
+	font:22px helvetica, sans-serif;
+	color:#005173;
+	margin-bottom:22px;
+	margin-left:10px;
+}
+#inner_content h2{
+	color:#97b014;
+	padding-bottom:10px;
+	margin-bottom:20px;
+	border-bottom:3px solid #005173;
+	font:18px helvetica, sans-serif;
+}
+#inner_content #list{
+	width:100%;
+	padding:20px 0 30px 0;
+
+	background:url('../images/list_bottom.png') no-repeat #ffffff;
+	background-position:bottom;
+	overflow:hidden;
+}
+
+#inner_content .top_box{
+	width:100%;
+	padding:20px 0 30px 0;
+
+	background:url('../images/list_bottom.png') no-repeat #ffffff;
+	background-position:bottom;
+	overflow:hidden;
+}
+#inner_content #list li{
+	float:left;
+	clear:both;
+	margin-bottom:20px;
+	background:url('../images/list_icon.png') no-repeat;
+	padding-left:40px;
+	margin-left:20px;
+}
+#inner_content #list li a{
+	font:16px helvetica, sans-serif;
+	color:#2d2d2d;
+}
+
+#inner_content #inner #table{
+	background:#ffffff;
+	border:1px solid #005173;
+	width:100%;
+}
+#inner_content #inner #table th{
+	font:16px helvetica, sans-serif;
+	background:#005173;
+	color:#ffffff;
+	padding: 3px;
+}
+#inner_content #inner #table td{
+	font:12px helvetica, sans-serif;
+	color:#005173;
+	padding:10px 5px;
+	vertical-align:bottom;
+}
+#inner_content #inner #table .header h3{
+	font-weight:bold;
+}
+#inner_content #inner #table .text{
+	font:11px helvetica, sans-serif;
+	color:#575757;
+	padding:5px;
+	vertical-align:bottom;
+
+}
+#inner_content #inner #table tr:nth-child(odd) {
+  background-color: #f3f5f6;
+}
+#inner_content #inner p, #error_explanation ul li{
+	font:12px/1.5 helvetica, sans-serif !important;
+	color:#005173;
+	margin-bottom:10px;
+}
+
+#error_explanation ul li {
+	list-style:none !important;
+	margin-left:14px;
+}
+
+
+/*-------------------------header-------------------------*/
+#header{
+	position:relative;
+}
+#header #logo{
+	position:absolute;
+	display:block;
+	width:216px;
+	height:106px;
+	background:url('../images/logo.png');
+	text-indent:-9999px;
+	z-index:99999;
+	top:5px;
+	left:15px;
+}
+#inner #header #nav{
+	float:right;
+	margin-bottom:0px;
+	
+}
+#header #nav{
+	float:right;
+	margin-bottom:35px;
+	
+}
+#header #nav li{
+	float:left;
+	margin:0 10px 0 0;
+	background:url('../images/nav_divider.png') no-repeat;
+	background-position:top right;
+	height:38px;
+	padding:15px 10px 0 0;
+}
+#header #nav li a{
+	font:16px helvetica,sans-serif;
+	color:#005b66;
+	text-decoration:none;
+}
+#header #nav  .last{
+	background:none;
+}
+/*-----------------------------Cta Area-----------------------*/
+#cta{
+	width:960px;
+	height:298px;
+	background:url('../images/cta_bg.jpg') no-repeat;
+	clear:both;
+	position:relative;
+}
+#cta h1{
+	background:url('../images/main_header.png') no-repeat;
+	height:67px;
+	width:565px;
+	text-indent:-9999px;
+	position:absolute;
+	display:block;
+	top:50px;
+	right:90px;
+}
+#cta #action_area{
+	float:right;
+	width:645px;
+	padding:10px;
+	margin:135px 0 0 0;
+}
+#cta #action_area h3{
+	font:24px helvetica, sans-serif;
+	color:#3a9b49;
+	display:block;
+}
+#cta #action_area ul{
+	clear:both;
+	margin-top:20px;
+}
+#cta #action_area ul li{
+	float:left;
+	margin:0 14px 0 0;
+}
+#cta #action_area ul li a{
+	text-indent:-9999px;
+}
+#cta #action_area ul li .contact{
+	width:194px;
+	height:35px;
+	background:url('../images/contact_naeti.png');
+	display:block;
+}
+
+#cta #action_area ul li .course_registration{
+	width:194px;
+	height:35px;
+	background:url('../images/course_registration.png');
+	display:block;
+}
+#cta #action_area ul li .view_courses{
+	width:194px;
+	height:35px;
+	background:url('../images/view_courses.png');
+	display:block;
+}
+/*----------------------------Courses Area---------------------*/
+#courses{
+	overflow:hidden;
+	background:#e5f691;
+}
+
+#courses h2{
+	width:100%;
+	border-bottom:5px solid #005173;
+	font:30px helvetica,arial,sans-serif;
+	color:#005173;
+	display:block;
+	background:#ecfb9f;
+	padding:15px 0 5px 0;
+	text-align:right;
+
+}
+#courses h2 span{
+	padding-right:20px;
+}
+#courses #home_images, #courses #course_list{
+	float:left;
+	background:#f3fbcd;
+	min-height:225px;
+}
+#courses #home_images{
+	margin:10px 0 10px 10px;
+	padding:10px 0 ;
+	min-height: 240px;
+}
+#courses #home_images li{
+	float:left;
+	min-width:193px;
+	min-height:225px;
+	margin:0px 10px;
+	background:#cccccc;
+	display:block;
+}
+#courses #course_list{
+	margin:10px 10px 10px 0;
+	width:300px;
+	min-height:260px;
+}
+#courses #course_list li{
+	clear:both;
+	padding:10px ;
+	margin:1px 20px;
+	border-bottom:1px solid #dddddd;
+	
+}
+#courses #course_list .last{
+	border: #f3fbcd;
+}
+#courses #course_list li a{
+	font:18px helvetica, sans-serif;
+	color:#3f3f3f;
+	text-decoration:none;
+}
+
+/*---------------------------------news and testimonial section------------------*/
+#content_area{
+	clear:both;
+	padding:10px;
+}
+#content_area #news{
+	float:left;
+	width:670px;
+	padding:5px;
+	overflow:hidden;
+}
+#content_area #news h2{
+	width:100%;
+	color:#004664;
+	padding:5px 0;
+	border-bottom:5px solid #e3f49d;
+	display:block;
+	font:16px helvetica, arial, sans-serif;
+	font-weight:bold;
+}
+#content_area #news p{
+	font:14px/1.5 helvetica, arial, sans-serif;
+	color:#161616;
+	margin:10px 0;
+}
+#content_area #testimonial{
+	float:left;
+	margin:20px 0 0 20px;
+}
+#content_area #testimonial h2{
+	width:100%;
+	color:#004664;
+	display:block;
+	font:15px helvetica, arial, sans-serif;
+	font-weight:bold;
+}
+#content_area #testimonial .content{
+	width:193px;
+	height:125px;
+	background:url('../images/testimonial_bg.png') no-repeat;
+	padding:10px;
+	margin-top:10px;
+	font:14px/1.5 georgia, serif;
+	font-style:italic;
+}
+/*----------------------------------course details page--------------------------------*/
+#inner_content .top_box #details{
+	float:left;
+	width:150px;
+	margin-left:10px;
+	margin-top:10px;
+}
+#inner_content .top_box #add_button{
+	background:url('../images/add_to_cart_button.jpg');
+	height:41px;
+	display:block;
+	text-indent:-99999px;
+	clear:both;
+	float:right;
+	margin:10px 10px 0 0;
+	width:143px;
+}
+#inner_content .top_box #details h3{
+	display:block;
+	font:16px helvetica, sans-serif;
+	font-weight:bold;
+	background:url('../images/list_icon.png') no-repeat;
+	background-position:top right;
+	margin-bottom:15px;
+}
+#inner_content .top_box #details li{
+	font:14px helvetica,sans-serif;
+	margin-bottom:5px;
+}
+#inner_content .top_box #info{
+	border:1px solid #e3eeaa;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	border-radius: 5px ;
+	behavior: url(PIE.php);
+	padding:10px;
+	min-height:100px;
+	float:left;
+	width:490px;
+	margin-left:10px;
+}
+#inner_content .top_box #info h3{
+	display:block;
+	font:16px helvetica, sans-serif;
+	font-weight:bold;
+	margin-bottom:15px;
+}
+#inner_content .top_box #info ul li{
+	margin-bottom:10px;
+	font:14px helvetica, sans-serif;
+}
+.view_icon{
+	background:url('../images/mag_glass.png') no-repeat;
+	width:35px;
+	height:25px;
+	text-indent:-9999px;
+	display:block;
+}
+/*---------------------------------Course Check out 1 page----------------------------------*/
+#inner_content #register_form{
+	margin-top:20px;
+}
+#inner_content #register_form label{
+	width:100px;
+	display:inline-block;
+	font-size:13px;
+}
+#inner_content #register_form label p{
+	font-size:18px;
+}
+#inner_content #register_form .text{
+	padding:3px;
+	width:300px;
+	border:1px solid #d5d5d5;
+
+}
+#inner_content #register_form fieldset{
+	margin-top: 70px;
+	float:right;
+	clear:both;
+}
+#inner_content #register_form .register_more{
+	display:block;
+	float:left;
+	background:url('../images/list_icon.png') no-repeat;
+	padding-left:30px;
+	color:#97b014;
+	font:14px helvetica, sans-serif;
+	margin:10px 20px 0 0;
+}
+#inner_content #register_form .submit_button{
+	display:block;
+	float:left;
+	width:124px;
+	height:29px;
+	background:url('../images/register_button.png');
+	border:0px;
+}
+#inner_content #cacelation_list li{
+	float:left;
+	clear:both;
+	margin-bottom:10px;
+	background:url('../images/list_icon.png') no-repeat;
+	background-position:0 1px;
+	padding-left:40px;
+}
+#inner_content #cacelation_list li p{
+	margin:0 0 0 0;
+	padding:0 0 0 0;
+}
+/*---------------------------------------course_checkout 2---------------------------*/
+#table .text{
+	width:10px;
+	padding:1px;
+}
+#update_cart{
+	display:block;
+	float:right;
+	clear:both;
+	background:url('../images/update_cart_btn.jpg');
+	height:23px;
+	width:100px;
+	text-indent:-9999px;
+	margin:15px 0;
+}
+	
+#table .center_text{
+	text-align:center;
+}
+#table .total{
+	font:13px helvetica;
+	font-weight:bold;
+}
+
+#billing_info{
+	width:100%;
+}
+#billing_info td label{
+	width:80px;
+	margin-right:10px;
+	display:inline-block;
+	text-align:right;
+	font:14px helvetica, sans-serif;
+	color:#005173;
+}
+#billing_info td{
+	padding-bottom:15px;
+}
+#billing_info td .text{
+	padding:3px;
+	background:#ffffff;
+	width:200px;
+}
+#billing_info td textarea{
+	padding:3px;
+	width:200px;
+}	
+#billing_info .register_btn{
+	display:block;
+	float:right;
+	width:124px;
+	height:29px;
+	background:url('../images/register_button.png');
+	border:0px;
+	text-indent:-9999px;
+	margin:40px 0 ;
+}
+/*---------------------------------------------Course Admin Homepage-----------------------*/
+.search_btn{
+	width:113px;
+	height:26px;
+	background:url('../images/search_btn.png');
+	float:right;
+	border:0px;
+	cursor:pointer;
+	margin:10px 0 0 0 ;
+}
+.next_10{
+	width:135px;
+	height:31px;
+	background:url('../images/next_10.png');
+	float:right;
+	border:0px;
+	cursor:pointer;
+	margin:10px 30px 0 0 ;
+	text-indent:-9999px;
+}
+#small_table{
+	background:url('../images/small_table_bg.png') repeat-y;
+
+	padding-bottom:15px;
+	position:relative;
+}
+#small_table #search_class{
+	margin:0 0 0 15px;
+} 
+#small_table #search_class .text{
+	width:350px;
+	background:#ffffff;
+	padding:3px;
+}
+#small_table #search_class .dropdown{
+	width:200px;
+}
+#small_table .footer{
+	position:absolute;
+	bottom:0px;
+	background:url('../images/small_table_bottom.png');
+	width:665px;
+	height:13px;
+	
+}
+#small_table h2{
+	display:block;
+	width:655px;
+	padding-left:10px;
+	padding-top:8px;
+	border:0px;
+	height:13px;
+	color:#ffffff;
+	background:url('../images/small_table_top.png');
+}
+#small_table th{
+	font:14px helvetica,sans-serif;
+	color:#2d2d2d;
+}
+#small_table td{
+	padding:0 50px 20px 0;
+	font:14px helvetica,sans-serif;
+	color:#2d2d2d;
+}
+
+#large_table{
+	background:url('../images/large_table_bg.png') repeat-y;
+	min-height:150px;
+	position:relative;
+	width:665px;
+	padding-bottom:20px;
+	margin-right:40px;
+	overflow:hidden;
+}
+#large_table table{
+	width:610px;
+	margin-left:25px;
+	background-repeat: no-repeat;
+}
+#large_table #header_bg{
+	background:url('../images/large_table_top.png') no-repeat ;
+	background-repeat:no-repeat;
+	background-position:top;
+}
+#large_table tr td{
+	background-image: none;
+	font:14px helvetica,sans-serif;
+	color:#2d2d2d;
+	padding-bottom:10px;
+	padding-top:10px;
+}
+#large_table tr td.small{
+	background-image: none;
+	font:12px helvetica,sans-serif;
+	color:#535353;
+}
+#large_table tr th{
+	background-image: none;
+	font:18px helvetica,sans-serif;
+	color:#ffffff;
+	
+}
+.edit_btn{
+	background:url('../images/edit_btn.png') no-repeat ;
+	width:32px;
+	height:32px;
+	display:block;
+	text-indent:-9999px;
+}
+#large_table .header{
+	width:665px;
+	height:68px;
+	
+	position: relative;
+	
+}
+#large_table .footer{
+	position:absolute;
+	bottom:-20px;
+	background:url('../images/large_table_bottom.png') no-repeat;
+	width:665px;
+	height:39px;
+	
+}
+
+#add_course_btn{
+	background:url('../images/add_class_btn.png') no-repeat ;
+	width:140px;
+	height:32px;
+	display:block;
+	text-indent:-9999px;
+	top:30px;
+	right:10px;
+	float:right;
+}
+
+
+
+/*-------------------------registrant admin------------------------*/
+#tabs table{
+	margin-top:15px;
+}
+#tabs table .header{
+	height:40px;
+}
+#tabs table .header th{
+	background:url('../images/smalltable_th_bg.png') repeat-x;
+	font-size:16px;
+	padding:5px 5px 5px 5px;
+	
+}
+#tabs table td{
+	padding:5px 5px 5px 5px;
+	
+}
+#asset_box{
+	border:1px solid #dadec0;
+	-webkit-border-radius: 3px;
+	    -moz-border-radius: 3px;
+	    border-radius: 3px;
+	behavior: url(PIE.php);
+	background:#ffffff;
+	padding:15px;
+	position:relative;
+	z-index:1;
+	width:626px;
+	overflow:hidden;
+}
+#asset_box .text{
+
+	padding:3px;
+	width:350px;
+}
+#asset_box .browse{
+	border:0px;
+	background:url('../images/browse_button.png');
+	width:79px;
+	height:24px;
+	text-indent:-9999px;
+	cursor:pointer;
+	}
+#asset_box .upload{
+		border:0px;
+		background:url('../images/upload_btn.png');
+		width:108px;
+		height:25px;
+		text-indent:-9999px;
+		cursor:pointer;
+		float:right;
+}
+#asset_box h3{
+	font:14px helvetica, sans-serif;
+	color:#97b014;
+	margin-top:15px;
+}
+#asset_box .textarea{
+
+	width:97%;
+	padding:10px;
+	border:#dddddd 1px solid;
+}
+/*-------------------------------------------User Data Info--------------------------*/
+#tabs table tr td .user_info{
+	width:200px;
+	border-right:1px solid #213e57;
+	float:left;
+}
+#tabs table tr td .user_info li{
+	clear:both;
+	font:14px helvetica, sans-serif;
+	margin-bottom:5px;
+}
+#tabs #course_list{
+	margin:0 0 0 0;
+	width:400px;
+}
+#tabs #course_list li a {
+	color:#2d2d2d;
+	font-size:11px;
+}
+#tabs #course_list th h3{
+	font:14px helvetica,sans-serif;
+	color:#2d2d2d;
+}
+#tabs #couse_list th{
+	width:300px;
+}
+#pay_offline_btn{
+	border:0px;
+	background:url('../images/pay_offline_btn.png');
+	width:152px;
+	height:35px;
+	text-indent:-9999px;
+	cursor:pointer;
+float:left;
+margin-right:20px;
+	
+}
+#pay_offline_btn{
+	border:0px;
+	background:url('../images/pay_offline_btn.png');
+	width:152px;
+	height:35px;
+	text-indent:-9999px;
+	cursor:pointer;
+float:left;
+margin-right:20px;
+	
+}
+#email_update_btn{
+	border:0px;
+	background:url('../images/email_btn.png');
+	width:152px;
+	height:35px;
+	text-indent:-9999px;
+	cursor:pointer;
+float:left;
+margin-right:20px;
+	
+}
+#submit_btn{
+	border:0px;
+	background:url('../images/submit_button.png');
+	width:135px;
+	height:31px;
+	text-indent:-9999px;
+	cursor:pointer;
+    float:left;
+    margin-right:20px;
+	
+}
+.delete_btn{
+		border:0px;
+		background:url('../images/delete_btn.png');
+		width:32px;
+		height:32px;
+		display:block;
+		text-indent:-9999px;
+		cursor:pointer;
+	    float:left;
+	    background-repeat: no-repeat;
+}
+
+.show_user_btn{
+		border:0px;
+		background:url('../images/show_user_btn.png');
+		width:32px;
+		height:32px;
+		display:block;
+		text-indent:-9999px;
+		cursor:pointer;
+	    float:left;
+	    background-repeat: no-repeat;
+}
+
+
+/*--------------------------testimonial page------------------------*/
+#inner_content #testimonial blockquote{
+	
+	font:14px/1.5 georgia,serif;
+	font-weight:bold;
+	font-style:italic;
+	color:#005173;
+}
+
+/*------------------------------gallery---------------------*/
+#gallery{
+	width:550px;
+	margin:0 auto;
+}
+#gallery li{
+	float:left;
+	margin:0 10px 10px 0;
+	overflow:hidden;
+	width:120px;
+	height:160px;
+	border:1px solid #dadec0 ;
+}
+#gallery li img{
+	max-width:280px;
+	position:relative;
+	left:-50px;
+}
+
+p.alert, p.notice{font:16px helvetica, sans-serif;padding:0px 0 10px 16px;;}
+
+div.field_with_errors{clear:none;}
+
+.pagination {
+  border: 1px solid #333333;
+  background-color: #333333;
+  color: white;
+  font-size: 1.2em;
+  padding: 10px;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  max-width:585px;
+   }
+  .pagination em {
+    color: #ECFBA1; }
+  .pagination a, .pagination a:visited {
+    color: white; }
+  .pagination a:hover {
+    color: #ECFBA1; }
+
+.course-list {
+  padding:0 !important;
+  margin:0 !important;
+}    
+.course-list li {
+  padding:0 !important;
+  margin:0 0 10px 0 !important;
+  font: 0.8em helvetica sans-serif !important;
+  float: none !important;
+  
+}

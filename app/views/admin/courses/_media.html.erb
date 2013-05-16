@@ -1,0 +1,82 @@
+<script type="text/javascript"> 
+  <% session_key_name = Rails.application.config.session_options[:key] %>
+  $(function() {
+    $('#custom_file_upload').uploadify({
+      'uploader'       : '/uploadify/uploadify.swf',
+      'script'         : '<%= upload_admin_courses_path(:course_id=>@course.id)%>',
+      'cancelImg'      : '/uploadify/cancel.png',
+      'multi'          : true,
+      'buttonText'      : 'Upload', 
+      'auto'           : true,
+      'displayData'    : 'speed',
+      //'fileExt'        : '*.jpg;*.gif;*.png',
+      //'fileDesc'       : 'Image Files (.JPG, .GIF, .PNG)',
+      'queueID'        : 'custom-queue',
+      'queueSizeLimit' : 20,
+      'simUploadLimit' : 3,
+      'removeCompleted': false,
+      'onProgress'      : function(event, queueID, fileObj, data){ $('#<%= "custom_file_upload" %>').html(data.percentage + '%') },
+      'onComplete'      : function(a, b, c, response){ eval(response); $('#<%= "custom_file_upload" %>').html(''); },
+      'onSelectOnce'   : function(event,data) {
+        $('#status-message').text(data.filesSelected + ' files have been added to the queue.');
+      },
+      'onAllComplete'  : function(event,data) {
+        $('#status-message').text(data.filesUploaded + ' files uploaded, ' + data.errors + ' errors.');
+      },
+      scriptData      : {
+        '_http_accept': 'application/javascript',
+        '_method': 'put',
+        '<%= session_key_name %>' : encodeURIComponent('<%= u cookies[session_key_name] %>'),
+        'authenticity_token': encodeURIComponent('<%= u form_authenticity_token %>')
+      }
+    });				
+  });
+</script> 
+<style type="text/css"> 
+  #custom-demo .uploadifyQueueItem {
+    background-color: #FFFFFF;
+    border: none;
+    border-bottom: 1px solid #E5E5E5;
+    font: 11px Verdana, Geneva, sans-serif;
+    height: 50px;
+    margin-top: 0;
+    padding: 10px;
+    width: 350px;
+  }
+  #custom-demo .uploadifyError {
+    background-color: #FDE5DD !important;
+    border: none !important;
+    border-bottom: 1px solid #FBCBBC !important;
+  }
+  #custom-demo .uploadifyQueueItem .cancel {
+    float: right;
+  }
+  #custom-demo .uploadifyQueue .completed {
+    color: #C5C5C5; 
+  }
+  #custom-demo .uploadifyProgress {
+    background-color: #E5E5E5;
+    margin-top: 10px;
+    width: 100%;
+  }
+  #custom-demo .uploadifyProgressBar {
+    background-color: #0099FF;
+    height: 3px;
+    width: 1px;
+  }
+  #custom-demo #custom-queue {
+    border: 1px solid #E5E5E5;
+    height: 213px;
+    margin-bottom: 10px;
+    width: 370px;
+  }
+</style> 
+
+<div class="demo-box" style="margin-left:15px"> 
+  <div id="status-message">Please click on the select button to choose files to upload. You can hold down "option" to select multiple files.</option></div>
+  <div id="custom-queue"></div>
+  <br>
+  <input id="custom_file_upload" type="file" name="user_asset" />
+  
+
+</div> 

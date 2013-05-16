@@ -1,0 +1,1 @@
+$(".confirmation_<%=@order_item.id%>").html("<%= escape_javascript(render :partial=>"confirmation", :locals=>{:order_item=>@order_item}) %>");

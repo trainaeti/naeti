@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=utf-8 />
+    <meta name='csrf-token' content='form_authenticity_token'>
+    <meta name='csrf-param' content='authenticity_token'>
+	<title><%=@page_title%></title>
+
+  <%= javascript_include_tag :defaults %>
+
+  <%= javascript_include_tag '/uploadify/swfobject.js'%>
+  <%= javascript_include_tag '/uploadify/jquery.uploadify.v2.1.4.js'%>
+
+  <%= javascript_include_tag 'application'%>
+	<!--[if IE]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	
+	<%= javascript_include_tag 'tabs' if @tabs%>
+  	<%= javascript_include_tag :ckeditor %>
+
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/master.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/smoothness/jquery-ui-1.8.10.custom.css" />
+	<%= stylesheet_link_tag '/css/application', :media => "all" %>
+	<%= stylesheet_link_tag '/uploadify/uploadify.css', :media => "all" %>
+    <%= csrf_meta_tag %>
+
+
+</head>
+<body id="inner">
+	<!-- begin wrap-->
+	<div id="wrap">
+        <div style="float:right; padding:0 25px">
+          <%= ((link_to image_tag("cart.png", :alt=>"Shopping Cart", :style=>"width:32px;height:32px;padding-top:10px;"), new_order_path, :title=>"Shopping Cart" ) unless ShoppingCart.where(:id=>request.session[:shopping_cart_id]).first.total==0) unless ShoppingCart.where(:id=>request.session[:shopping_cart_id]).first.blank? %>
+        </div>  
+	  <%if user_signed_in? %>
+        <div style="float:right; padding:15px 25px 0 25px;">
+          <%=link_to "Log Out", destroy_user_session_path %>
+        </div>
+        <%if current_user.admin? %>
+          <div style="float:right; padding:15px 25px 0 25px;">
+            <a href="/admin">Site Admin</a>
+          </div>
+        <%end%>
+        <%if current_user.instructor%>
+          <div style="float:right; padding:15px 25px 0 25px;">
+            <a  href="/instructors">Instructor Dashboard</a>
+          </div>
+        <%end%>
+      <%end%>
+    
+		<div id="top_bar"></div>
+		<div id="content_bg"><!-- for content top bg-->
+		<div id="content_outer">
+				<div id="header">
+					<%unless @home%><a href="/" 	id="logo">Home</a><%end%>
+					<ul id="nav">
+						<li><a href="/">Home</a></li>
+						<li><%=link_to "Courses", courses_path %></li>
+						<li><a href="/news">News</a></li>
+						<li><a href="/about-us">About Us</a></li>
+						<li><a href="/consulting-opportunities">Consulting Opportunities</a></li>
+						<li><a href="/training-locations">Training Locations</a></li>
+						<li class="last"><a href="/contact">Contact</a></li>
+							
+					</ul>
+				</div><!-- end header-->
+				
+				<%unless @home%>
+				<div id="left_nav">
+					<%if @admin_section%>
+						<%=render :partial=>"/shared/admin_nav"%>
+					<%else%>
+						<%if @instructor_section%>
+							<%=render :partial=>"/shared/instructor_nav"%>
+						<%else%>
+							<%=render :partial=>"/shared/normal_nav"%>
+						<%end%>
+					<%end%>
+					
+				</div><!-- end left_nav-->
+				<div id="inner_content">
+				<%end%>
+				
+
+					<%unless @home%><h1><%=raw @page_title%></h1><%end%>
+					
+					<div id="inner">
+
+
+					<%if @admin_section or @instructor_section or @padding%><div style="padding:15px"><%end%>
+				
+					<%if notice%><p class="notice"><%= notice %></p><%end%>
+					<%if alert%><p class="alert"><%= alert %></p><%end%>
+				
+					<%=yield%>
+					
+					<%if @admin_section%></div><%end%>
+					</div>
+					
+				<%unless params[:controller] == "site" and params[:action] == "index"%>	
+				</div><!-- end inner div for bg color-->
+				<%end%>
+				
+				</div><!--end content area-->
+
+		</div><!-- end content outer-->
+		
+		
+		</div><!-- end inner div-->
+	</div>
+	<!-- end wrap -->
+</body>
+</html>

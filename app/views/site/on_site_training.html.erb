@@ -1,0 +1,85 @@
+
+
+
+<div id="onsite_training" style="padding:15px 20px">
+	
+	<%= form_for(@on_site_training, :url=>"/on-site-training") do |f| %>
+	  <% if @on_site_training.errors.any? %>
+	    <div id="error_explanation">
+	      <h2><%= pluralize(@on_site_training.errors.count, "error") %> prohibited this on_site_training from being saved:</h2>
+
+	      <ul>
+	      <% @on_site_training.errors.full_messages.each do |msg| %>
+	        <li><%= msg %></li>
+	      <% end %>
+	      </ul>
+	    </div>
+	  <% end %>
+	
+	<%if request.post? and not flash.now[:notice]%>
+	<p>Thank you for your submission.</p>
+	<%else%>
+	
+	<div id="asset_box">
+		<p>
+			<label for="">Contact Name</label><br>
+			<%= f.text_field :name, :class=>"text" %><br>
+		</p>
+		<p>
+			<label for="">Company Name</label><br>
+			<%= f.text_field :company, :class=>"text" %><br>
+		</p>
+		<p>
+			<label for="">Email</label><br>
+			<%= f.text_field :email, :class=>"text" %><br>
+		</p>
+		<p>
+			<label for="">Address</label><br>
+			<%= f.text_field :address, :class=>"text" %><br>
+		</p>
+		<p style="float:left; width:120px">
+			<label for="">City</label><br>
+			<%= f.text_field :city, :class=>"text", :style=>"width:100px;" %><br>
+		</p>
+		<p style="float:left; width:120px">
+			<label for="">State</label><br>
+			<%= f.text_field :state, :class=>"text", :style=>"width:100px;" %><br>
+		</p>
+		<p style="float:left; width:120px">
+			<label for="">Zip</label><br>
+			<%= f.text_field :zip, :class=>"text", :style=>"width:100px;" %><br>
+		</p>
+		<p style="float:left; clear:both; width:220px">
+			<label for="">Telephone</label><br>
+			<%= f.text_field :phone, :class=>"text", :style=>"width:130px;" %><br>
+		</p>
+		<p style="float:left; width:220px">
+			<label for="">Fax</label><br>
+			<%= f.text_field :fax, :class=>"text", :style=>"width:130px;" %><br>
+		</p>
+		<p style="clear:both"><h3>Class Information</h3></p>
+		<p>
+			<label for="">Name of Class </label><br>
+			<%= f.text_field :name_of_class, :class=>"text"%><br>
+		</p>
+		<p>
+			<label for="">Location of Training</label><br>
+			<%= f.text_field :location_of_training, :class=>"text"%><br>
+		</p>
+		<p>
+			<label for="">Number of Students</label><br>
+		    <%= f.text_field :number_of_students, :class=>"text"%><br>
+		</p>
+		<p>
+			<label for="">Dates of Training</label><br>
+			<%= f.text_field :dates_of_training, :class=>"text"%><br>
+		</p>
+		<p>
+			<label for="">Billing Address</label><br>
+			<%= f.text_field :billing_address, :class=>"text"%><br>
+		</p>
+		<p style="float:left; clear:both"><input type="submit" value="submit" id="submit_btn"></p>
+	</div><!-- end asset_box-->
+	<%end%>
+	<%end%>
+</div>

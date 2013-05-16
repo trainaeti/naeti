@@ -1,0 +1,21 @@
+<tr> 
+  <td colspan="2"><h2 style="padding-top:20px">Credit Card Information</h2></td> 
+</tr> 
+<tr> 
+  <td colspan="2"> 
+    <label for="">Card Number:</label> 
+	<%=f.text_field :card_number, :class=>"text" %>
+  </td> 
+</tr> 
+<tr> 
+  <td> 
+    <label for="">Exp Date:</label> 
+	<%= f.date_select :card_expires_on, :discard_day => true, :start_year => Date.today.year, :end_year => (Date.today.year+10) %>
+  </td> 
+</tr> 
+<tr> 
+  <td colspan="2"> 
+    <label for="">Security Code:</label> 
+    <%=f.text_field :card_verification, :class=>"text", :style=>"width:5s0px"%>
+  </td> 
+</tr> 

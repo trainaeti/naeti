@@ -1,0 +1,42 @@
+
+	<ul id="list">
+		<%for category in CourseCategory.all%>
+		  <li><%= link_to "Register for #{category.name} Training", courses_path(:course_category_id=>category.id) %></li>
+		<%end%>
+	</ul>
+	
+	<%if @course_category%>
+	<div style="padding:15px">
+		<h2><%=@course_category.name%> Courses</h2>
+		<% unless @courses.blank? %>
+		<div class="rounded_box">
+        
+		<table id="table" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<th >Course</th>
+				<th style="width:400px">Details</th>
+				<th>View</th>
+			</tr>
+			<%@courses.each do |course|%>
+			<tr>
+				<td class="header">
+				<h3><%=course.title%></h3>
+			</td>
+			<td class="text">
+				<%=course.description%>
+			</td>
+			<td>
+			  <%= link_to "View", course_path(course.id) %>
+			</td>
+			</tr>
+			<%end%>	
+		<% else %>
+          <h3>There are no courses for this category</h3>
+		<% end %>
+					
+		</table>
+		</div>
+
+	</div>
+	<%end%>
+	

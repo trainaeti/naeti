@@ -1,0 +1,10 @@
+<div id="asset_box">
+<p id="notice"><%= notice %></p>
+
+<%= image_tag @asset.avatar.url %>
+<%= image_tag @asset.avatar.url(:medium) %>
+<%= image_tag @asset.avatar.url(:thumb) %>
+
+<%= link_to 'Edit', edit_asset_path(@asset) %> |
+<%= link_to 'Back', assets_path %>
+</div>

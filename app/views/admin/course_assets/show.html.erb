@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Course:</b>
+  <%= @course_asset.course_id %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @course_asset.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @course_asset.description %>
+</p>
+
+<p>
+  <b>Asset file name:</b>
+  <%= @course_asset.asset_file_name %>
+</p>
+
+<p>
+  <b>Asset content type:</b>
+  <%= @course_asset.asset_content_type %>
+</p>
+
+<p>
+  <b>Asset file size:</b>
+  <%= @course_asset.asset_file_size %>
+</p>
+
+
+<%= link_to 'Edit', edit_course_asset_path(@course_asset) %> |
+<%= link_to 'Back', course_assets_path %>

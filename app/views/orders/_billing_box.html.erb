@@ -1,0 +1,46 @@
+<table id="billing_info" border="0" cellspacing="0" cellpadding="0"> 
+  <tr>
+    <td>
+      <div id="error-block"></div>
+        <%=render :partial => "errors", :locals => {:f => f} %>
+      </div>
+    </td>
+  </tr>
+	<%=render :partial=>"billing_form", :locals=>{:f=>f} %>
+	<tr> 
+		<td colspan="2"><h2 style="padding-top:20px">Credit Card Information</h2></td> 
+	</tr> 
+	<tr> 
+		<td colspan="2"> 
+			<label for="">Card Number:</label> 
+			<%=f.text_field :card_number, :class=>"text" %>
+		</td> 
+	</tr> 
+	<tr> 
+	
+		<td> 
+			<label for="">Exp Date:</label> 
+			<%= f.date_select :card_expires_on, :discard_day => true, :start_year => Date.today.year, :end_year => (Date.today.year+10) %>
+
+		</td> 
+	</tr> 
+	<tr> 
+		<td colspan="2"> 
+			<label for="">Security Code:</label> 
+			<%=f.text_field :card_verification, :class=>"text", :style=>"width:5s0px"%>
+		</td> 
+	</tr> 
+	<tr> 
+		<td colspan="2"> 
+			<p>Information 
+
+			Your e-mail address must be valid. We use e-mail for communication purposes (order notifications, etc). Therefore, it is essential to provide a valid e-mail address to be able to use our services correctly. <br><br> 
+
+			All your private data is confidential. We will never sell, exchange or market it in any way.
+			For further information on the responsibilities of both parts, you may refer to our 
+			Terms & Conditions</p> 
+		</td> 
+	</tr> 
+</table> 
+
+

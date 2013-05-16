@@ -1,0 +1,5 @@
+<p><%=link_to image_tag('back_btn.png', :alt=>'Back').html_safe, admin_courses_path %></p>
+<%= form_for(@user, :url=>{:controller=>:users, :action=>:user_admin}) do |f| %>
+  <% @is_password=true %>
+  <%= render :partial=>"form", :locals=>{:f=>f} %>
+<% end %>

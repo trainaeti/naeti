@@ -1,0 +1,68 @@
+<% if @user.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+	<div id="asset_box">
+		<p>
+			<%= f.label :first_name, "First Name" %><br>
+			<%= f.text_field :first_name, :class=>"text" %><br>
+		</p>
+
+		<p>
+			<%= f.label :last_name, "Last Name" %><br>
+			<%= f.text_field :last_name, :class=>"text" %><br>
+		</p>		
+		
+		<p style="clear:both" style="width:300px">
+			<%= f.label :role, "Role" %><br>
+		
+			<select name="role">
+			  <option value="admin" <%if @user.admin%>selected<%end%>>Admin</option>
+			  <option value="instructor" <%if @user.instructor%>selected<%end%>>Instructor</option>
+			  <option value="general" <%unless @user.admin or @user.instructor%>selected<%end%>>General</option>
+			</select>
+		</p>
+		<p>
+			<%= f.label :email, "Email" %><br>
+			<%= f.text_field :email, :class=>"text" %><br>
+		</p>
+		<p>
+			<%= f.label :address, "Address" %><br>
+			<%= f.text_field :address, :id=>"", :class=>"text" %>
+		</p>
+		<p style="float:left; width:110px">
+			<%= f.label :city, "City" %><br>
+			<%= f.text_field :city, :class=>"text", :style=>"width:90px;" %>
+		</p>
+		<p style="float:left; width:150px">
+		    <%= f.label :state_id, "State" %><br>
+			<%= f.select :state_id, State.all.collect { |v| [ v.name, v.id ] }, :style=>"width:100px;" %>
+		</p>
+		<p style="float:left; width:100px">
+			<%= f.label :zip, "Zip" %><br>
+			<%= f.text_field :zip, :class=>"text", :style=>"width:100px;" %>
+		</p>
+	    <p style="clear:both">
+			<%= f.label :phone, "Phone" %><br>
+			<%= f.text_field :phone, :class=>"text" %><br>
+		</p>
+        <% if @is_password.present? %>
+		  <p>
+	  		<%= f.label :password, "Password" %><br>
+ 			<%= f.password_field :password, :class=>"text" %><br>
+	  	  </p>
+		
+		  <p>
+			<%= f.label :password_confirmation, "Confirm Password" %><br>
+			<%= f.password_field :password_confirmation, :class=>"text" %><br>
+		  </p>
+        <% end %>		
+		
+	</div><!-- end asset_box-->
+	<p style="float:right;margin-top:20px"><input type="submit" name="some_name" value="" id="submit_btn"></p>

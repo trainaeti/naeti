@@ -1,0 +1,23 @@
+<div id="large_table">
+<div id="header_bg">
+<table colspan="4" class="zebra"  >
+	<tr class="header">
+		<th width="300px" >Course</th>
+		<th >Reports Download</th>
+		
+	</tr>
+	<%for course in @courses%>
+		<tr>
+			<td ><%=course.title%></td>
+		<td class="small">Download Reports and Transaction Roster <a href="/courses/<%=course.id%>/coursereport-<%=course.id%>-<%=@datestamp%>.pdf"><img src="images/pdf_icon_small.gif" alt=""></a> <a href="/courses/<%=course.id%>/export_xls"><img style="margin-left:10px"src="images/csv_icon.gif" alt=""></a> <a href="/courses/<%=course.id%>/export_emails">Download Emails</a> </td>
+		
+		</tr>
+	<%end%>
+	
+	
+	
+</table>
+<%=will_paginate @courses%>
+</div>
+<div class="footer"></div>
+</div>

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @content_block.name %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @content_block.body %>
+</p>
+
+<%= link_to 'Edit', edit_content_block_path(@content_block) %> |
+<%= link_to 'Back', content_blocks_path %>

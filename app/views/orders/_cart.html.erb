@@ -1,0 +1,43 @@
+<%if @shopping_cart.shopping_cart_items.present? %>
+  <div class="rounded_box">
+    <table id="table" border="0" cellspacing="0" cellpadding="0"> 
+      <tr> 
+        <th>Course/Registrant</th> 
+    	<th>Dates</th> 
+    	<th class="center_text">Remove</th> 
+    	<th>Total</th> 
+      </tr> 
+      <% @shopping_cart.shopping_cart_items.each do |item| %>
+        <tr> 
+	      <td class="header"> 
+	        <h3>
+	          <%=item.course.title%><br>
+	      	  <%=item.registrant.first_name.capitalize%>
+		      <%=item.registrant.last_name.capitalize%><br>
+		      <%=item.registrant.email%><br>
+	          <%=link_to image_tag("add.png", :title=>"Add Another Student"), "/courses/register/#{item.course.id}"%>
+	        </h3> 
+	      </td> 
+	      <td> 
+	        <%=item.course_date.start_date.strftime("%a %b %d, %Y")%> - <%=item.course_date.end_date.strftime("%a %b %d, %Y")%>
+	      </td> 
+	
+    	  <td class="center_text">
+	        <%=link_to image_tag("delete_btn.png", :title=>"Remove This Item", :style=>"width:16px;height:16px;"), shopping_cart_item_path(item), :remote=>false, :method => :delete, :confirm=>"Do you want to remove this registrant from your cart?" %>
+          </td>
+   	      <td><%if item.course_date.class_size==0%>Class Full (will be added to wait list)<%else%><%=format_price(item.course.price)%><%end%></td> 
+    	</tr> 
+      <%end%>
+  
+      <tr> 
+        <td></td> 
+    	<td></td> 
+    	<td align="right"><h3 class="total">Total</h3></td> 
+    	<td><h3 class="total"><%=format_price(@total)%></h3></td> 
+      </tr> 
+    </table>
+  </div>
+
+<%else%>
+  <p>There are no items in your shopping cart.</p>
+<% end %>

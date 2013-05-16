@@ -1,0 +1,41 @@
+<%= form_for(@course_asset) do |f| %>
+  <% if @course_asset.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@course_asset.errors.count, "error") %> prohibited this course_asset from being saved:</h2>
+
+      <ul>
+      <% @course_asset.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :course_id %><br />
+    <%= f.text_field :course_id %>
+  </div>
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :asset_file_name %><br />
+    <%= f.text_field :asset_file_name %>
+  </div>
+  <div class="field">
+    <%= f.label :asset_content_type %><br />
+    <%= f.text_field :asset_content_type %>
+  </div>
+  <div class="field">
+    <%= f.label :asset_file_size %><br />
+    <%= f.text_field :asset_file_size %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

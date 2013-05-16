@@ -1,0 +1,19 @@
+<tr>
+  <td colspan="2">
+    <div id="error-block"></div>
+      <%=render :partial => "errors", :locals => {:f => @order} %>
+    </div>
+  </td>
+</tr>
+<tr> 
+  <td colspan="2">
+    <h2 style="padding-top:20px">Check/Purchase Order Information</h2>
+  </td> 
+</tr> 
+<tr> 
+  <td colspan="2">
+    <%=hidden_field_tag "order_is_purchase_order", true, :id=>"order_is_purchase_order", :name=>"order[is_purchase_order]" %>
+    <%=label_tag "Check/PO Number:" %>
+    <%=text_field_tag :order, nil,  :class=>"text", :id=>"order_po_number", :name=>"order[po_number]" %>    
+  </td> 
+</tr>

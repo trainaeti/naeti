@@ -1,0 +1,6 @@
+<% if @order.errors.present? %>
+  $("#error-block").html("<%= escape_javascript( render :partial=>'/orders/errors' ) %>");
+<% else %>
+  $("#current_cart").remove();
+  $("#payment_box").html("<%= escape_javascript( render :partial=>'/orders/success' ) %>");
+<% end %>

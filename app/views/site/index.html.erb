@@ -1,0 +1,40 @@
+<div id="cta">
+	<h1>International Leadership in Environmental, Health and Safety Training Since 1985</h1>
+	<div id="action_area">
+		<%= ContentBlock.where(:friendly_url=>"home-page-tag-line").first.body.html_safe %>
+		<ul>
+			<li><%=link_to "Course Registration", courses_path, :class=>"course_registration" %></li>
+			<li><%=link_to "Print/View Courses", '/course-dates', :class=>"view_courses" %></li>
+			<li><%=link_to "Contact NAETI", '/contact', :class=>"contact" %></li>
+		</ul>
+	</div><!-- end action area-->
+</div><!-- end CTA area-->
+<div id="courses">
+	<h2><span>Our Courses</span></h2>
+	<ul id="home_images">
+		<li><%=image_tag("hero1.png") %></li>
+		<li><%=image_tag("hero2.png") %></li>
+		<li><%=image_tag("hero3.png") %></li>
+	</ul>
+	<ul id="course_list">
+	  <% CourseCategory.all.each do |category| %>
+        <li <%="last" if CourseCategory.all.last.id==category.id %>>
+          <%=link_to category.name, courses_path(:course_category_id=>category.id)%>
+        </li>
+	  <%end%>
+	</ul>
+</div><!-- end courses-->
+
+<div id="content_area">
+	<div id="news" >
+		<h2>NAETI News</h2>
+		<%=truncate(@news.body.gsub(/<\/?[^>]*>/, "").html_safe, :length => 450)%>
+		<%=link_to "read more", "/news" %>
+	</div><!-- end news area-->
+	<ul id="testimonial">
+		<li><h2>What others have said</h2></li>
+		<li class="content">
+		  <%=@testimonial.body.gsub(/<\/?[^>]*>/, "").html_safe%>
+		</li>
+	</ul><!-- end testimonial-->
+</div><!-- end content area-->

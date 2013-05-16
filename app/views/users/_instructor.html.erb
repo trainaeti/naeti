@@ -1,0 +1,51 @@
+<div id="large_table" >
+	<div id="header_bg" >
+		<div id="tabs">
+			<ul>
+				<li><a href="#tabs-1">Instructor Info</a></li>
+				<li><a href="#tabs-2">Courses</a></li>
+				<li><a href="#tabs-3">Edit Info</a></li>
+			</ul>
+			<div id="tabs-1">
+	  		  <div class="user_info" style="margin-left:15px;margin-top:15px;">
+	  		    <h1>General Information</h1>
+	  		    <p style="margin-left:15px;"><strong>Name:</strong> <%=@user.name%></p>
+	  		    <p style="margin-left:15px;"><strong>Address:</strong> <%=@user.address%></p>
+			 	<p style="margin-left:15px;"><strong>City:</strong> <%=@user.city%></p>
+				<p style="margin-left:15px;"><strong>State:</strong> <%=@user.state.name %></p>
+				<p style="margin-left:15px;"><strong>Phone:</strong> <%=@user.phone%></p>
+		  		<p style="margin-left:15px;"><strong>Email:</strong> <a href="mailto:<%=@user.email%>"><%=@user.email%></a></p>
+	  		  </div>
+			</div> <!-- end tabs 1-->
+			
+			<div id="tabs-2">
+	  		  <div  class="user_info" style="margin-left:15px;margin-top:15px;">
+	  		    <h1>Assigned Courses</h1>
+	  		    <% @course_dates.each do |course_date| %>
+	  		      <p style="margin-left:15px;">
+	  		      <strong>
+	  		        <%= link_to(course_date.course.title, admin_course_path(course_date.course)) %>
+	  		      </strong><br>
+	  		      <%= course_date.start_date.strftime('%m/%d/%Y')%> - <%= course_date.end_date.strftime('%m/%d/%Y')%><br>
+	  		      <%= link_to "Download List (#{OrderItem.where(:course_date_id=>course_date.id).count} people)", admin_registrants_path(:csv, :course_date=>course_date.id), :target=>"_blank" %>
+	  		      </p>	  		    
+	  		    <% end %>
+	  		    
+	  		  </div>
+			</div>
+
+			<div id="tabs-3">
+	  		  <div class="user_info" style="margin-left:15px;margin-top:15px;">
+	  		    <h1>Edit Info</h1>
+  	  		    <%= form_for(@user) do |f| %>
+  	  		      <%= render :partial=>"form", :locals=>{:f=>f} %>
+  	  		    <% end %>
+	  		  </div>
+			</div> <!-- end tabs 1-->
+				
+		</div><!-- end tabs-->
+	
+	</div><!-- end header bg-->
+	<div class="footer"></div>
+</div><!-- end large table-->
+	
