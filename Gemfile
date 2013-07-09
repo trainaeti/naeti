@@ -1,11 +1,13 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.3'
+gem 'rails', '~> 3.0.3'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-gem 'sqlite3-ruby', :require => 'sqlite3'
+group :development do
+  gem 'sqlite3-ruby', :require => 'sqlite3'
+  gem 'debugger' # for 1.9.x+
+end
 
 # Use unicorn as the web server
 gem 'unicorn'
@@ -23,7 +25,6 @@ gem 'mysql', '2.8.1'
 gem 'activemerchant'
 gem 'pdfkit'
 gem 'wkhtmltopdf-binary'
-gem 'engineyard'
 gem 'mime-types'
 gem "meta_where"
 
@@ -32,8 +33,7 @@ gem "meta_where"
 gem 'rack-ssl'
 gem 'fastercsv'
 
-# To use debugger
-gem 'ruby-debug'
+
 #gem "exception_notification", :git => "http://github.com/rails/exception_notification.git", :require => 'exception_notifier'
 
 #gem "mail", "2.1.3"
