@@ -14,8 +14,11 @@
 			    <% @course.course_dates.current.available.each do |course_date| %>
 				<li>
 				  <%=course_date.start_date.strftime("%a %b %d, %Y")%> - <%=course_date.end_date.strftime("%a %b %d, %Y")%>
-                  [<%=course_date.sku %>]
-                  <%=( link_to (image_tag("pdf_icon_small.gif", :style=>"vertical-align:middle"), course_date.pdf_location, :title=>"Download Course Brochure") ) if course_date.pdf_location %>
+                  [<%= course_date.sku %>]
+                  <% if course_date.pdf_location -%>
+	                  <%= link_to image_tag("pdf_icon_small.gif", :style => "vertical-align:middle"), course_date.pdf_location, 
+	                  :title => "Download Course Brochure" %>
+                  <% end -%>
 				</li>
 				<%end%>
 			</ul>
@@ -34,10 +37,12 @@
 	
 	<div style="padding:15px 30px">
 		<h2>Description</h2>
-		<p><%=@course.description%></p>
-		<% if @course.pdf_location.present? %>
+		<p><%= @course.description %></p>
+		<% if @course.pdf_location.present? -%>
 		  <p>
-		    <%=link_to ("<img src='/images/pdf_icon_small.gif' style='vertical-align:middle'> Download Course Brochure ".html_safe, @course.pdf_location) %>
+		  	<a href="<%= @course.pdf_location %>"><img src="/images/pdf_icon_small.gif" style="vertical-align: middle">
+		  		Download Course Brochure
+		  	</a>
 		  </p>
 		<% end %>
 		<% if @course.course_dates.current.waiting.present? %>
@@ -46,12 +51,12 @@
 			<ul>
 			    <% @course.course_dates.waiting.current.each do |course_date| %>
 				<p>
-				  <%=course_date.start_date.strftime("%a %b %d, %Y")%> - <%=course_date.end_date.strftime("%a %b %d, %Y")%>
-                  [<%=course_date.sku %>]
+				  <%= course_date.start_date.strftime("%a %b %d, %Y") %> - <%= course_date.end_date.strftime("%a %b %d, %Y") %>
+                  [<%= course_date.sku %>]
                   &nbsp;&nbsp;&nbsp;
-                  <%=link_to "Register for Waiting List", new_waitinglist_path(:course_date_id=>course_date.id) %>
+                  <%= link_to "Register for Waiting List", new_waitinglist_path(:course_date_id => course_date.id) %>
 				</p>
-				<%end%>
+				<% end %>
 			</ul>
 		<% end %>	
 	</div>
